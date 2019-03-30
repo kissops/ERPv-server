@@ -8,5 +8,8 @@ install:
   - "pip install pipenv"
   - "pipenv install --dev"
 
+env:
+  - SECRETKEY=testing
+
 script:
   - pipenv run pytest
