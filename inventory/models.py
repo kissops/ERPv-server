@@ -75,7 +75,7 @@ class BillOfMaterials(models.Model):
     ie: an intermediate object to the list of BOMitems that make up the product.
     """
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["product"]
