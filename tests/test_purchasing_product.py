@@ -23,7 +23,7 @@ class PurchaseTestCase(TestCase):
         self.po_line = PurchaseOrderLine.objects.get(pk=1)
 
     def test_purchased_product_allocated_as_purchased(self):
-        self.assertEqual(self.pp.purchased(), 10.00)
+        self.assertEqual(self.pp.on_order(), 10.00)
 
     def test_product_allocated_as_purchased(self):
         product = Product.objects.get(name="product 1")

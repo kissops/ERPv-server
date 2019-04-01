@@ -18,6 +18,7 @@ class ManufacturingTestCase(TestCase):
         self.assertEqual(self.job.complete, False)
         product = Product.objects.get(name="product 1")
         self.assertEqual(product.quantity, 0.00)
+        self.job.bom_allocated = True
         self.job.complete = True
         self.job.save()
         product = Product.objects.get(name="product 1")
