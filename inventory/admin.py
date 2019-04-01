@@ -39,7 +39,18 @@ class BillOfMaterialsAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    readonly_fields = ["planned", "purchased", "sold"]
+    fieldsets = (
+        (None, {"fields": (("name", "quantity"),)}),
+        (
+            "Product Inventory Detail",
+            {
+                "classes": ("wide",),
+                "fields": (("planned", "purchased", "sold", "allocated"),),
+            },
+        ),
+        ("Product Requirements", {"fields": ("required",)}),
+    )
+    readonly_fields = ["planned", "purchased", "sold", "required", "allocated"]
     list_display = ["name", "quantity"]
     search_fields = ("name",)
     list_per_page = 10

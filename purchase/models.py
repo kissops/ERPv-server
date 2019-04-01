@@ -39,7 +39,7 @@ class PurchasedProduct(models.Model):
     def __str__(self):
         return self.name
 
-    def purchased(self):
+    def on_order(self):
         try:
             orders = sum(
                 [

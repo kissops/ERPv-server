@@ -4,6 +4,7 @@ from .models import Customer, SoldProduct, SalesOrder, SalesOrderLine
 
 class SalesOrderInline(admin.TabularInline):
     model = SalesOrderLine
+    fields = ["product", "quantity", "complete"]
     extra = 0
 
 

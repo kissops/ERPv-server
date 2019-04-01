@@ -4,6 +4,7 @@ from .models import Supplier, PurchasedProduct, PurchaseOrder, PurchaseOrderLine
 
 class PurchaseOrderInline(admin.TabularInline):
     model = PurchaseOrderLine
+    fields = ["product", "quantity", "complete"]
     extra = 0
 
 
@@ -17,7 +18,7 @@ class PurchaseOrderAdmin(admin.ModelAdmin):
 
 
 class PurchasedProductInline(admin.TabularInline):
-    readonly_fields = ["purchased"]
+    readonly_fields = ["on_order"]
     model = PurchasedProduct
     extra = 0
 

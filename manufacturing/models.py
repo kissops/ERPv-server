@@ -15,6 +15,7 @@ class Job(models.Model):
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     priority = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
+    bom_allocated = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
 
@@ -34,7 +35,7 @@ class Job(models.Model):
             pass
 
     def save(self, *args, **kwargs):
-        if self.complete == True:
+        if self.complete == True and self.bom_allocated == True:
             product = Product.objects.get(pk=self.product.pk)
             product.quantity = product.quantity + Decimal(self.quantity)
             product.save()
@@ -42,8 +43,22 @@ class Job(models.Model):
             if self.bom() is not None:
                 for item in self.bom():
                     product = Product.objects.get(pk=item.product.pk)
-                    product.quantity = product.quantity - item.quantity * self.quantity
+                    product.quantity = product.quantity - item.quantity * Decimal(
+                        self.quantity
+                    )
+                    product.allocated = product.allocated - item.quantity * Decimal(
+                        self.quantity
+                    )
                     product.save()
+        else:
+            if self.bom() is not None:
+                for item in self.bom():
+                    product = Product.objects.get(pk=item.product.pk)
+                    product.allocated = product.allocated + item.quantity * Decimal(
+                        self.quantity
+                    )
+                    product.save()
+                self.bom_allocated = True
         super().save(*args, **kwargs)
 
     def __str__(self):

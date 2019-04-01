@@ -1,4 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Warehouse(models.Model):
@@ -17,7 +19,8 @@ class Product(models.Model):
     """
 
     name = models.CharField(max_length=128, unique=True)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    allocated = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     class Meta:
         ordering = ["name"]
@@ -38,7 +41,7 @@ class Product(models.Model):
         try:
             orders = sum(
                 [
-                    purchased_product.purchased()
+                    purchased_product.on_order()
                     for purchased_product in self.product_purchased_product.all()
                 ]
             )
@@ -58,15 +61,20 @@ class Product(models.Model):
         except:
             pass
 
-
-#    def required(self):
-#        try:
-#            if self.quantity - self.sold() + self.planned() + self.purchased() < 0.00:
-#                return self.sold() - self.planned() - self.purchased() - self.quantity
-#            else:
-#                return 0
-#        except:
-#            pass
+    def required(self):
+        try:
+            if self.quantity - self.sold() + self.planned() + self.purchased() <= 0.00:
+                return (
+                    self.sold()
+                    - self.planned()
+                    - self.purchased()
+                    - self.quantity
+                    + self.allocated
+                )
+            else:
+                return 0
+        except:
+            return 0
 
 
 class BillOfMaterials(models.Model):
@@ -101,6 +109,11 @@ class BOMItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"
+
+    def clean(self):
+        # Don't allow a bill of materials to contain itself.
+        if self.bom.product == self.product:
+            raise ValidationError(_("BOM inceptions are not advisable."))
 
 
 class Location(models.Model):
