@@ -4,6 +4,6 @@
 
 Hybrid Enterprise Resource Planning.
 
-## Development Setup
+## Documentation
 
-refer to [documentation/development-setup.md](documentation/development-setup.md).
+refer to the ERPv [wiki!](https://github.com/Um9i/ERPv/wiki)
