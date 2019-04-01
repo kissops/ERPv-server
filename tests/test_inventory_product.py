@@ -34,3 +34,10 @@ class InventoryTestCase(TestCase):
         self.assertEqual(product1.quantity, 10.00)
         self.assertEqual(product2.quantity, 0.00)
         self.assertEqual(product3.quantity, 0.00)
+
+    def test_products_bill_of_materials_cannot_inception(self):
+        product2 = Product.objects.get(name="product 2")
+        BillOfMaterials.objects.create(product=product2)
+        bom = BillOfMaterials.objects.get(product=product2)
+        BOMItem.objects.create(bom=bom, product=product2, quantity=1.00)
+        self.assertTrue(len(bom.bom_items.all()), 0)
