@@ -1,0 +1,9 @@
+branch: master
+update: insecure
+label_prs: update
+requirements:
+  - requirements.txt:
+      update: insecure
+  - requirements-dev.txt:
+      update: False
+schedule: "every day"
