@@ -4,13 +4,14 @@ from .models import Customer, SoldProduct, SalesOrder, SalesOrderLine
 
 class SalesOrderInline(admin.TabularInline):
     model = SalesOrderLine
-    fields = ["product", "quantity", "complete"]
+    readonly_fields = ["value"]
+    fields = ["product", "quantity", "complete", "value"]
     extra = 0
 
 
 @admin.register(SalesOrder)
 class SalesOrderAdmin(admin.ModelAdmin):
-    list_display = ["id", "customer", "ship_by"]
+    list_display = ["id", "customer", "ship_by", "value"]
     list_filter = ["ship_by"]
     inlines = [SalesOrderInline]
     search_fields = ["id", "customer__name"]

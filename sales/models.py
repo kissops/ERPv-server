@@ -8,9 +8,9 @@ class Customer(models.Model):
     name = models.CharField(max_length=128)
     address = models.TextField()
     postcode = models.CharField(max_length=7)
-    phone = models.CharField(max_length=64, blank=True, null=True)
-    email = models.CharField(max_length=128, blank=True, null=True)
-    website = models.CharField(max_length=256, blank=True, null=True)
+    phone = models.CharField(max_length=64, blank=True)
+    email = models.CharField(max_length=128, blank=True)
+    website = models.CharField(max_length=256, blank=True)
 
     def __str__(self):
         return self.name
@@ -51,6 +51,9 @@ class SalesOrder(models.Model):
     def __str__(self):
         return f"{self.pk}"
 
+    def value(self):
+        return sum([line.value() for line in self.sales_order_lines.all()])
+
 
 class SalesOrderLine(models.Model):
     sales_order = models.ForeignKey(
@@ -75,3 +78,6 @@ class SalesOrderLine(models.Model):
 
     def __str__(self):
         return self.product.name
+
+    def value(self):
+        return Decimal(self.product.price) * Decimal(self.quantity)

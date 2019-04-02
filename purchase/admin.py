@@ -4,13 +4,14 @@ from .models import Supplier, PurchasedProduct, PurchaseOrder, PurchaseOrderLine
 
 class PurchaseOrderInline(admin.TabularInline):
     model = PurchaseOrderLine
-    fields = ["product", "quantity", "complete"]
+    readonly_fields = ["value"]
+    fields = ["product", "quantity", "complete", "value"]
     extra = 0
 
 
 @admin.register(PurchaseOrder)
 class PurchaseOrderAdmin(admin.ModelAdmin):
-    list_display = ["id", "supplier", "due_by"]
+    list_display = ["id", "supplier", "due_by", "value"]
     list_filter = ["due_by"]
     inlines = [PurchaseOrderInline]
     search_fields = ["id", "supplier__name"]
