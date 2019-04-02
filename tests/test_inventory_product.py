@@ -7,7 +7,7 @@ class InventoryTestCase(TestCase):
     def setUp(self):
         Product.objects.create(name="product 1", quantity=0.00)
         Product.objects.create(name="product 2", quantity=10.00)
-        Product.objects.create(name="product 3", quantity=10.00)
+        Product.objects.create(name="product 3", quantity=5.00)
         product1 = Product.objects.get(name="product 1")
         product2 = Product.objects.get(name="product 2")
         product3 = Product.objects.get(name="product 3")
@@ -24,8 +24,12 @@ class InventoryTestCase(TestCase):
         product3 = Product.objects.get(name="product 3")
         self.assertEqual(product1.quantity, 0.00)
         self.assertEqual(product2.quantity, 10.00)
-        self.assertEqual(product3.quantity, 10.00)
+        self.assertEqual(product3.quantity, 5.00)
         self.job.bom_allocated = True
+        self.job.save()
+        self.assertEqual(product1.planned(), 10.00)
+        self.assertEqual(product2.required(), 0.00)
+        self.assertEqual(product3.required(), 5.00)
         self.job.complete = True
         self.job.save()
         product1 = Product.objects.get(name="product 1")
@@ -33,7 +37,7 @@ class InventoryTestCase(TestCase):
         product3 = Product.objects.get(name="product 3")
         self.assertEqual(product1.quantity, 10.00)
         self.assertEqual(product2.quantity, 0.00)
-        self.assertEqual(product3.quantity, 0.00)
+        self.assertEqual(product3.quantity, -5.00)
 
     def test_products_bill_of_materials_cannot_inception(self):
         product2 = Product.objects.get(name="product 2")
