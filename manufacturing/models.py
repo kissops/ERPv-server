@@ -13,7 +13,7 @@ class Job(models.Model):
         Product, on_delete=models.CASCADE, related_name="product_jobs"
     )
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-    priority = models.IntegerField()
+    priority = models.IntegerField(default=2)
     created_date = models.DateTimeField(default=timezone.now)
     bom_allocated = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
