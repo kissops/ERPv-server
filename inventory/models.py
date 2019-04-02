@@ -1,6 +1,8 @@
+from decimal import Decimal
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from statistics import mean
 
 
 class Warehouse(models.Model):
@@ -20,7 +22,10 @@ class Product(models.Model):
 
     name = models.CharField(max_length=128, unique=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    allocated = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    allocated_for_jobs = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    desired_stock_level = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0
+    )
 
     class Meta:
         ordering = ["name"]
@@ -62,15 +67,16 @@ class Product(models.Model):
             pass
 
     def required(self):
+        allocated_stock = (
+            self.sold() + self.allocated_for_jobs + self.desired_stock_level
+        )
+        stock_with_orders = (
+            self.quantity + Decimal(self.planned()) + Decimal(self.purchased())
+        )
+        required = stock_with_orders - allocated_stock
         try:
-            if self.quantity - self.sold() + self.planned() + self.purchased() <= 0.00:
-                return (
-                    self.sold()
-                    - self.planned()
-                    - self.purchased()
-                    - self.quantity
-                    + self.allocated
-                )
+            if required < 0.00:
+                return abs(required)
             else:
                 return 0
         except:
@@ -91,6 +97,9 @@ class BillOfMaterials(models.Model):
 
     def __str__(self):
         return self.product.name
+
+    def total_cost(self):
+        return sum([bom_line.cost() for bom_line in self.bom_items.all()])
 
 
 class BOMItem(models.Model):
@@ -114,6 +123,11 @@ class BOMItem(models.Model):
         # Don't allow a bill of materials to contain itself.
         if self.bom.product == self.product:
             raise ValidationError(_("BOM inceptions are not advisable."))
+
+    def cost(self):
+        # return an average of all purchased product costs.
+        average = mean(p.cost for p in self.product.product_purchased_product.all())
+        return average * Decimal(self.quantity)
 
 
 class Location(models.Model):

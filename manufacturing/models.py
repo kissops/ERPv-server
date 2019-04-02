@@ -46,16 +46,18 @@ class Job(models.Model):
                     product.quantity = product.quantity - item.quantity * Decimal(
                         self.quantity
                     )
-                    product.allocated = product.allocated - item.quantity * Decimal(
-                        self.quantity
+                    product.allocated_for_jobs = (
+                        product.allocated_for_jobs
+                        - item.quantity * Decimal(self.quantity)
                     )
                     product.save()
         else:
             if self.bom() is not None:
                 for item in self.bom():
                     product = Product.objects.get(pk=item.product.pk)
-                    product.allocated = product.allocated + item.quantity * Decimal(
-                        self.quantity
+                    product.allocated_for_jobs = (
+                        product.allocated_for_jobs
+                        + item.quantity * Decimal(self.quantity)
                     )
                     product.save()
                 self.bom_allocated = True

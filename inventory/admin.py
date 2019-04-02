@@ -4,6 +4,8 @@ from .models import Product, BillOfMaterials, BOMItem, Location, Warehouse
 
 class BOMItemInline(admin.TabularInline):
     model = BOMItem
+    readonly_fields = ["cost"]
+    fields = ["product", "quantity", "cost"]
     extra = 0
 
 
@@ -32,6 +34,8 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(BillOfMaterials)
 class BillOfMaterialsAdmin(admin.ModelAdmin):
+    readonly_fields = ["total_cost"]
+    fields = ["product", "total_cost"]
     inlines = [BOMItemInline]
     list_per_page = 10
     search_fields = ("product__name",)
@@ -40,17 +44,17 @@ class BillOfMaterialsAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {"fields": (("name", "quantity"),)}),
+        (None, {"fields": (("name", "quantity"), ("desired_stock_level",))}),
         (
             "Product Inventory Detail",
             {
                 "classes": ("wide",),
-                "fields": (("planned", "purchased", "sold", "allocated"),),
+                "fields": (("planned", "purchased", "sold", "allocated_for_jobs"),),
             },
         ),
         ("Product Requirements", {"fields": ("required",)}),
     )
-    readonly_fields = ["planned", "purchased", "sold", "required", "allocated"]
+    readonly_fields = ["planned", "purchased", "sold", "required", "allocated_for_jobs"]
     list_display = ["name", "quantity"]
     search_fields = ("name",)
     list_per_page = 10
