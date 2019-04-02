@@ -52,12 +52,16 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "silk",
+    "crispy_forms",
+    "rest_framework",
     "report_builder",
     "inventory.apps.InventoryConfig",
     "manufacturing.apps.ManufacturingConfig",
     "purchase.apps.PurchaseConfig",
     "sales.apps.SalesConfig",
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 REPORT_BUILDER_INCLUDE = [
     "inventory.product",
@@ -156,3 +160,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, f"client{os.sep}static")]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 FIXTURE_DIRS = (os.path.join(BASE_DIR, "fixtures"),)
+LOGIN_REDIRECT_URL = "/"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.DjangoModelPermissions",)
+}

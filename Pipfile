@@ -18,6 +18,8 @@ gunicorn = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 whitenoise = "*"
+django-crispy-forms = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
