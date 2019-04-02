@@ -9,25 +9,39 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('inventory', '0001_initial'),
-    ]
+    dependencies = [("inventory", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='Job',
+            name="Job",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('priority', models.IntegerField(default=2)),
-                ('created_date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('bom_allocated', models.BooleanField(default=False)),
-                ('complete', models.BooleanField(default=False)),
-                ('complete_date', models.DateTimeField(blank=True, null=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_jobs', to='inventory.Product')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("quantity", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("priority", models.IntegerField(default=2)),
+                (
+                    "created_date",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                ("bom_allocated", models.BooleanField(default=False)),
+                ("complete", models.BooleanField(default=False)),
+                ("complete_date", models.DateTimeField(blank=True, null=True)),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="product_jobs",
+                        to="inventory.Product",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['priority'],
-            },
-        ),
+            options={"ordering": ["priority"]},
+        )
     ]
