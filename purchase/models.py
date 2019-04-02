@@ -16,19 +16,6 @@ class Supplier(models.Model):
         return self.name
 
 
-class PurchaseOrder(models.Model):
-    supplier = models.ForeignKey(
-        Supplier, on_delete=models.CASCADE, related_name="supplier_purchase_orders"
-    )
-    due_by = models.DateTimeField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.pk}"
-
-    def value(self):
-        return sum([line.value() for line in self.purchase_order_lines.all()])
-
-
 class PurchasedProduct(models.Model):
     supplier = models.ForeignKey(
         Supplier, on_delete=models.CASCADE, related_name="supplier_products"
@@ -55,6 +42,22 @@ class PurchasedProduct(models.Model):
             pass
 
 
+class PurchaseOrder(models.Model):
+    supplier = models.ForeignKey(
+        Supplier, on_delete=models.CASCADE, related_name="supplier_purchase_orders"
+    )
+    due_by = models.DateTimeField(blank=True, null=True, default=timezone.now())
+
+    def __str__(self):
+        return f"{self.pk}"
+
+    def value(self):
+        return sum([line.value() for line in self.purchase_order_lines.all()])
+
+    def received_value(self):
+        return sum([line.received_value() for line in self.purchase_order_lines.all()])
+
+
 class PurchaseOrderLine(models.Model):
     purchase_order = models.ForeignKey(
         PurchaseOrder, on_delete=models.CASCADE, related_name="purchase_order_lines"
@@ -65,7 +68,9 @@ class PurchaseOrderLine(models.Model):
         related_name="product_purchase_orders",
     )
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-
+    received_quantity = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.00
+    )
     created_date = models.DateTimeField(default=timezone.now)
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
@@ -73,7 +78,7 @@ class PurchaseOrderLine(models.Model):
     def save(self, *args, **kwargs):
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
-            product.quantity = product.quantity + Decimal(self.quantity)
+            product.quantity = product.quantity + Decimal(self.received_quantity)
             product.save()
             self.complete_date = timezone.now()
         super().save(*args, **kwargs)
@@ -83,3 +88,6 @@ class PurchaseOrderLine(models.Model):
 
     def value(self):
         return Decimal(self.product.cost) * Decimal(self.quantity)
+
+    def received_value(self):
+        return Decimal(self.product.cost) * Decimal(self.received_quantity)

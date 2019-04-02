@@ -18,7 +18,7 @@ class SalesTestCase(TestCase):
         SalesOrder.objects.create(pk=1, customer=customer)
         so = SalesOrder.objects.get(pk=1)
         SalesOrderLine.objects.create(
-            pk=1, sales_order=so, product=self.sp, quantity=10.00
+            pk=1, sales_order=so, product=self.sp, quantity=10.00, shipped_quantity=0.00
         )
         self.so_line = SalesOrderLine.objects.get(pk=1)
 
@@ -33,7 +33,8 @@ class SalesTestCase(TestCase):
         self.assertEqual(self.so_line.complete, False)
         product = Product.objects.get(name="product 1")
         self.assertEqual(product.quantity, 10.00)
+        self.so_line.shipped_quantity = 8.00
         self.so_line.complete = True
         self.so_line.save()
         product = Product.objects.get(name="product 1")
-        self.assertEqual(product.quantity, 0.00)
+        self.assertEqual(product.quantity, 2.00)

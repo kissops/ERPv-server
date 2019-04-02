@@ -18,7 +18,11 @@ class PurchaseTestCase(TestCase):
         PurchaseOrder.objects.create(pk=1, supplier=supplier)
         po = PurchaseOrder.objects.get(pk=1)
         PurchaseOrderLine.objects.create(
-            pk=1, purchase_order=po, product=self.pp, quantity=10.00
+            pk=1,
+            purchase_order=po,
+            product=self.pp,
+            quantity=10.00,
+            received_quantity=0.00,
         )
         self.po_line = PurchaseOrderLine.objects.get(pk=1)
 
@@ -33,7 +37,8 @@ class PurchaseTestCase(TestCase):
         self.assertEqual(self.po_line.complete, False)
         product = Product.objects.get(name="product 1")
         self.assertEqual(product.quantity, 0.00)
+        self.po_line.received_quantity = 15.00
         self.po_line.complete = True
         self.po_line.save()
         product = Product.objects.get(name="product 1")
-        self.assertEqual(product.quantity, 10.00)
+        self.assertEqual(product.quantity, 15.00)

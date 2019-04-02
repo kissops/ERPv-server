@@ -46,13 +46,16 @@ class SalesOrder(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="customer_sales_orders"
     )
-    ship_by = models.DateTimeField(blank=True, null=True)
+    ship_by = models.DateTimeField(blank=True, null=True, default=timezone.now())
 
     def __str__(self):
         return f"{self.pk}"
 
     def value(self):
         return sum([line.value() for line in self.sales_order_lines.all()])
+
+    def shipped_value(self):
+        return sum([line.shipped_value() for line in self.sales_order_lines.all()])
 
 
 class SalesOrderLine(models.Model):
@@ -63,7 +66,9 @@ class SalesOrderLine(models.Model):
         SoldProduct, on_delete=models.CASCADE, related_name="product_sales_orders"
     )
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-
+    shipped_quantity = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.00
+    )
     created_date = models.DateTimeField(default=timezone.now)
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
@@ -71,7 +76,7 @@ class SalesOrderLine(models.Model):
     def save(self, *args, **kwargs):
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
-            product.quantity = product.quantity - Decimal(self.quantity)
+            product.quantity = product.quantity - Decimal(self.shipped_quantity)
             product.save()
             self.complete_date = timezone.now()
         super().save(*args, **kwargs)
@@ -81,3 +86,6 @@ class SalesOrderLine(models.Model):
 
     def value(self):
         return Decimal(self.product.price) * Decimal(self.quantity)
+
+    def shipped_value(self):
+        return Decimal(self.product.price) * Decimal(self.shipped_quantity)
