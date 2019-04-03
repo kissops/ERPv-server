@@ -1,7 +1,38 @@
 version: '2'
+
 services:
+
   web:
     build: .
+    depends_on:
+      - db
     ports:
       - 8000:8000
     restart: always
+    volumes:
+      - static:/client/staticfiles
+
+  nginx:
+    build: ./nginx/
+    depends_on:
+      - web
+    ports:
+      - 80:80
+    volumes:
+      - static:/ERPv/client/staticfiles
+
+  db:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_DB: erpv
+      POSTGRES_PASSWORD: erpv
+      POSTGRES_USER: erpv
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  static:
