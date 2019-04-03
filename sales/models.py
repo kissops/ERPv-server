@@ -46,7 +46,7 @@ class SalesOrder(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="customer_sales_orders"
     )
-    ship_by = models.DateTimeField(blank=True, null=True, default=timezone.now())
+    ship_by = models.DateTimeField(blank=True, null=True, default=timezone.now)
 
     def __str__(self):
         return f"{self.pk}"
