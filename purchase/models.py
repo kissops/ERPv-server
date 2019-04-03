@@ -46,7 +46,7 @@ class PurchaseOrder(models.Model):
     supplier = models.ForeignKey(
         Supplier, on_delete=models.CASCADE, related_name="supplier_purchase_orders"
     )
-    due_by = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    due_by = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.pk}"
