@@ -1,0 +1,12 @@
+<div class="col-lg-3 d-none d-lg-block d-xl-block">
+    <div class="card">
+        <div class="card-header bg-light py-4">
+            <strong>Menu</strong>
+        </div>
+        <div class="list-group list-group-flush">
+            {% if request.user.is_staff %}
+            <a href="/admin/" class="list-group-item list-group-item-action py-4 text-danger">Administration</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

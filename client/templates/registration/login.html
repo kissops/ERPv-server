@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<div class="row">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card">
+            <div class="card-header bg-light py-4">
+                <strong>Login</strong>
+            </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {{ form|crispy}}
+                        <div class="my-5">
+                            <button class="btn btn-block btn-success" type="submit" value="login">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
