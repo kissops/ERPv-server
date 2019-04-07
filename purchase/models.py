@@ -48,6 +48,9 @@ class PurchaseOrder(models.Model):
     )
     due_by = models.DateTimeField(blank=True, null=True)
 
+    class Meta:
+        ordering = ["due_by"]
+
     def __str__(self):
         return f"{self.pk}"
 

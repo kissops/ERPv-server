@@ -48,6 +48,9 @@ class SalesOrder(models.Model):
     )
     ship_by = models.DateTimeField(blank=True, null=True)
 
+    class Meta:
+        ordering = ["ship_by"]
+
     def __str__(self):
         return f"{self.pk}"
 
