@@ -1,3 +1,25 @@
 body {
-    background: #FEFEFE;
+    background: #F8F9FA;
+}
+
+.content {
+    font-size: 115%;
+}
+
+.dash-btn {
+    color: #444;
+    font-size: 1.2em;
+    line-height: 2.5;
+    text-align: center;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    margin-bottom: .5em;
+    margin-top: .5em;
+}
+
+.dash-btn:hover {
+    background: #F8F9FA;
+    box-shadow: 0 0 0 .1rem rgba(167, 167, 167, 0.25);
+    color: #222;
+    text-decoration: none;
 }

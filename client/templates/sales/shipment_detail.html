@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="row">
+    {% include "layouts/menu.html" %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header bg-light py-4">
+                <strong>{{ object.customer }} <br />Sales Order: {{ object.pk }}</strong>
+            </div>
+            <div class="container-fluid my-4">
+                <div class="row">
+                    <div class="col content">
+                        <div class="text-right mr-3 text-secondary">Quantity</div>
+                        <ul class="list-group list-group-flush">
+                            {% for obj in object.sales_order_lines.all %}
+                                <a href="" class="list-group-item list-group-item-action py-4">
+                                    <div class="d-flex justify-content-between">
+                                        <span>{{ obj.product }}</span>
+                                        {{ obj.quantity }}
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </ul>
+                        <div class="text-right mr-3 my-4"><small class="text-muted">Total Order Value:</small> &nbsp; £{{ object.value|floatformat:2|intcomma }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

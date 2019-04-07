@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="row">
+    {% include "layouts/menu.html" %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header bg-light py-4">
+                <strong>Shipment Schedule <br />&nbsp;</strong>
+            </div>
+            <div class="container-fluid my-4">
+                <div class="row">
+                    <div class="col content">
+                        <div class="text-right mr-3 text-secondary">Ship by Date</div>
+                        <ul class="list-group list-group-flush">
+                            {% for obj in object_list %}
+                            <a href="{% url 'shipment_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                                <div class="d-flex justify-content-between">
+                                    <span>{{ obj.pk }} &nbsp; {{ obj.customer }}</span>
+                                    {{ obj.ship_by }}
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </ul>
+                        {% include "layouts/pagination.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
