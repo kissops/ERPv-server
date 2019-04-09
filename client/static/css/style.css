@@ -23,3 +23,8 @@ body {
     color: #222;
     text-decoration: none;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
