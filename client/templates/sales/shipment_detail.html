@@ -17,7 +17,7 @@
                             {% for obj in object.sales_order_lines.all %}
                                 <li class="clickable list-group-item list-group-item-action py-4" data-toggle="modal" data-target="#{{ obj.pk }}Modal">
                                     <div class="d-flex justify-content-between">
-                                        <span>{{ obj.product }}</span>
+                                        <span>{{ obj.product.product }}</span>
                                         {{ obj.quantity }}
                                     </div>
                                 </li>
