@@ -4,8 +4,15 @@ from .models import Customer, SoldProduct, SalesOrder, SalesOrderLine
 
 class SalesOrderInline(admin.TabularInline):
     model = SalesOrderLine
-    readonly_fields = ["value"]
-    fields = ["product", "quantity", "complete", "value"]
+    readonly_fields = ["value", "shipped_value"]
+    fields = [
+        "product",
+        "quantity",
+        "value",
+        "shipped_quantity",
+        "shipped_value",
+        "complete",
+    ]
     extra = 0
 
 
