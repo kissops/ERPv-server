@@ -5,4 +5,3 @@ urlpatterns = [
     path("shipments/", ShipmentSchedule.as_view(), name="shipment_schedule"),
     path("shipments/<int:pk>/", ShipmentDetail.as_view(), name="shipment_detail"),
 ]
-

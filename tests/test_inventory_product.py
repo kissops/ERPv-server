@@ -11,7 +11,7 @@ class InventoryTestCase(TestCase):
         product1 = Product.objects.get(name="product 1")
         product2 = Product.objects.get(name="product 2")
         product3 = Product.objects.get(name="product 3")
-        BillOfMaterials.objects.create(product=product1)
+        BillOfMaterials.objects.create(product=product1, labour_cost=0.00)
         bom = BillOfMaterials.objects.get(product=product1)
         BOMItem.objects.create(bom=bom, product=product2, quantity=1.00)
         BOMItem.objects.create(bom=bom, product=product3, quantity=1.00)
@@ -41,7 +41,7 @@ class InventoryTestCase(TestCase):
 
     def test_products_bill_of_materials_cannot_inception(self):
         product2 = Product.objects.get(name="product 2")
-        BillOfMaterials.objects.create(product=product2)
+        BillOfMaterials.objects.create(product=product2, labour_cost=0.00)
         bom = BillOfMaterials.objects.get(product=product2)
         BOMItem.objects.create(bom=bom, product=product2, quantity=1.00)
         self.assertTrue(len(bom.bom_items.all()), 0)

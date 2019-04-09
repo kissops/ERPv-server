@@ -90,6 +90,7 @@ class BillOfMaterials(models.Model):
     """
 
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    labour_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     class Meta:
         ordering = ["product"]
@@ -99,7 +100,14 @@ class BillOfMaterials(models.Model):
         return self.product.name
 
     def total_cost(self):
-        return sum([bom_line.cost() for bom_line in self.bom_items.all()])
+        try:
+            tc = (
+                sum([bom_line.cost() for bom_line in self.bom_items.all()])
+                + self.labour_cost
+            )
+            return tc
+        except:
+            return sum([bom_line.cost() for bom_line in self.bom_items.all()])
 
 
 class BOMItem(models.Model):

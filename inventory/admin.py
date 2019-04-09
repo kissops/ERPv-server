@@ -35,7 +35,7 @@ class LocationAdmin(admin.ModelAdmin):
 @admin.register(BillOfMaterials)
 class BillOfMaterialsAdmin(admin.ModelAdmin):
     readonly_fields = ["total_cost"]
-    fields = ["product", "total_cost"]
+    fields = ["product", "labour_cost", "total_cost"]
     inlines = [BOMItemInline]
     list_per_page = 10
     search_fields = ("product__name",)
