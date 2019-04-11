@@ -18,7 +18,7 @@ class SalesOrderInline(admin.TabularInline):
 
 @admin.register(SalesOrder)
 class SalesOrderAdmin(admin.ModelAdmin):
-    list_display = ["id", "customer", "ship_by", "value"]
+    list_display = ["id", "customer", "ship_by", "value", "complete"]
     list_filter = ["ship_by"]
     inlines = [SalesOrderInline]
     search_fields = ["id", "customer__name"]

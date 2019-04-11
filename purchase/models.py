@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.db import models
 from django.utils import timezone
 from inventory.models import Product
+from ledger.models import PurchaseLedger, InventoryLedger
 
 
 class Supplier(models.Model):
@@ -60,6 +61,9 @@ class PurchaseOrder(models.Model):
     def received_value(self):
         return sum([line.received_value() for line in self.purchase_order_lines.all()])
 
+    def complete(self):
+        return [line.complete for line in self.purchase_order_lines.all()]
+
 
 class PurchaseOrderLine(models.Model):
     purchase_order = models.ForeignKey(
@@ -84,7 +88,21 @@ class PurchaseOrderLine(models.Model):
             product.quantity = product.quantity + Decimal(self.received_quantity)
             product.save()
             self.complete_date = timezone.now()
+            # create a ledger entry when receiving product
+            InventoryLedger.objects.create(
+                name=self.product.product,
+                amount=self.received_quantity,
+                value=self.received_value(),
+            )
         super().save(*args, **kwargs)
+        if False in [self.purchase_order.complete()]:
+            pass
+        else:
+            PurchaseLedger.objects.create(
+                name=self.purchase_order.supplier,
+                amount=0.00,
+                value=self.purchase_order.received_value(),
+            )
 
     def __str__(self):
         return self.product.name

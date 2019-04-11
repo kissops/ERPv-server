@@ -18,7 +18,7 @@ class PurchaseOrderInline(admin.TabularInline):
 
 @admin.register(PurchaseOrder)
 class PurchaseOrderAdmin(admin.ModelAdmin):
-    list_display = ["id", "supplier", "due_by", "value"]
+    list_display = ["id", "supplier", "due_by", "value", "complete"]
     list_filter = ["due_by"]
     inlines = [PurchaseOrderInline]
     search_fields = ["id", "supplier__name"]

@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.db import models
 from django.utils import timezone
 from inventory.models import Product
+from ledger.models import SalesLedger, InventoryLedger
 
 
 class Customer(models.Model):
@@ -60,6 +61,9 @@ class SalesOrder(models.Model):
     def shipped_value(self):
         return sum([line.shipped_value() for line in self.sales_order_lines.all()])
 
+    def complete(self):
+        return [line.complete for line in self.sales_order_lines.all()]
+
 
 class SalesOrderLine(models.Model):
     sales_order = models.ForeignKey(
@@ -82,7 +86,21 @@ class SalesOrderLine(models.Model):
             product.quantity = product.quantity - Decimal(self.shipped_quantity)
             product.save()
             self.complete_date = timezone.now()
+            # create a ledger entry when shipping product
+            InventoryLedger.objects.create(
+                name=self.product.product,
+                amount=self.shipped_quantity * -1,
+                value=self.shipped_value(),
+            )
         super().save(*args, **kwargs)
+        if False in [self.sales_order.complete()]:
+            pass
+        else:
+            SalesLedger.objects.create(
+                name=self.sales_order.customer,
+                amount=0.00,
+                value=self.sales_order.shipped_value(),
+            )
 
     def __str__(self):
         return self.product.name

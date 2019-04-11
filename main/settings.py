@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRETKEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ["*"]
 DEBUG = True
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 INTERNAL_IPS = ["127.0.0.1"]
 SILKY_PYTHON_PROFILER = True
 # SILKY_PYTHON_PROFILER_BINARY = True
@@ -35,7 +35,7 @@ SILKY_AUTHENTICATION = True
 SILKY_AUTHORISATION = True
 SECURE_BROWSER_XSS_FILTER = True
 # SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "report_builder",
     "inventory.apps.InventoryConfig",
+    "ledger.apps.LedgerConfig",
     "manufacturing.apps.ManufacturingConfig",
     "purchase.apps.PurchaseConfig",
     "sales.apps.SalesConfig",
