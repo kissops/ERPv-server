@@ -102,7 +102,7 @@ class PurchaseOrderLine(models.Model):
             else:
                 if self.received_quantity != 0.00:
                     PurchaseLedger.objects.create(
-                        name=self.purchase_order.supplier,
+                        name=self.purchase_order.pk,
                         amount=0.00,
                         value=self.purchase_order.received_value(),
                     )

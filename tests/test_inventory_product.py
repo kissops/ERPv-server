@@ -1,6 +1,6 @@
 from django.test import TestCase
-from inventory.models import Product, BillOfMaterials, BOMItem
-from manufacturing.models import Job
+from inventory.models import Product
+from manufacturing.models import BillOfMaterials, BOMItem, Job
 
 
 class InventoryTestCase(TestCase):

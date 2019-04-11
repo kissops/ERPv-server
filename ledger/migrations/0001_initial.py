@@ -8,60 +8,83 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='InventoryLedger',
+            name="InventoryLedger",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("value", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
             ],
-            options={
-                'verbose_name_plural': 'Inventory ledger',
-            },
+            options={"verbose_name_plural": "Inventory ledger"},
         ),
         migrations.CreateModel(
-            name='ManufacturingLedger',
+            name="ManufacturingLedger",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("value", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
             ],
-            options={
-                'verbose_name_plural': 'Manufacturing ledger',
-            },
+            options={"verbose_name_plural": "Manufacturing ledger"},
         ),
         migrations.CreateModel(
-            name='PurchaseLedger',
+            name="PurchaseLedger",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("value", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
             ],
-            options={
-                'verbose_name_plural': 'Purchase ledger',
-            },
+            options={"verbose_name_plural": "Purchase ledger"},
         ),
         migrations.CreateModel(
-            name='SalesLedger',
+            name="SalesLedger",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('value', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("value", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
             ],
-            options={
-                'verbose_name_plural': 'Sales ledger',
-            },
+            options={"verbose_name_plural": "Sales ledger"},
         ),
     ]

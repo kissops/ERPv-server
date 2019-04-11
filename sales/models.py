@@ -100,7 +100,7 @@ class SalesOrderLine(models.Model):
             else:
                 if self.shipped_quantity != 0.00:
                     SalesLedger.objects.create(
-                        name=self.sales_order.customer,
+                        name=self.sales_order.pk,
                         amount=0.00,
                         value=self.sales_order.shipped_value(),
                     )
