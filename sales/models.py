@@ -87,11 +87,12 @@ class SalesOrderLine(models.Model):
             product.save()
             self.complete_date = timezone.now()
             # create a ledger entry when shipping product
-            InventoryLedger.objects.create(
-                name=self.product.product,
-                amount=self.shipped_quantity * -1,
-                value=self.shipped_value(),
-            )
+            if self.shipped_quantity != 0.00:
+                InventoryLedger.objects.create(
+                    name=self.product.product,
+                    amount=self.shipped_quantity * -1,
+                    value=self.shipped_value(),
+                )
         super().save(*args, **kwargs)
         if self.complete == True:
             if False in [self.sales_order.complete()]:

@@ -89,11 +89,12 @@ class PurchaseOrderLine(models.Model):
             product.save()
             self.complete_date = timezone.now()
             # create a ledger entry when receiving product
-            InventoryLedger.objects.create(
-                name=self.product.product,
-                amount=self.received_quantity,
-                value=self.received_value(),
-            )
+            if self.received_quantity != 0.00:
+                InventoryLedger.objects.create(
+                    name=self.product.product,
+                    amount=self.received_quantity,
+                    value=self.received_value(),
+                )
         super().save(*args, **kwargs)
         if self.complete == True:
             if False in [self.purchase_order.complete()]:
