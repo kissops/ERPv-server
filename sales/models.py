@@ -93,14 +93,16 @@ class SalesOrderLine(models.Model):
                 value=self.shipped_value(),
             )
         super().save(*args, **kwargs)
-        if False in [self.sales_order.complete()]:
-            pass
-        else:
-            SalesLedger.objects.create(
-                name=self.sales_order.customer,
-                amount=0.00,
-                value=self.sales_order.shipped_value(),
-            )
+        if self.complete == True:
+            if False in [self.sales_order.complete()]:
+                pass
+            else:
+                if self.shipped_quantity != 0.00:
+                    SalesLedger.objects.create(
+                        name=self.sales_order.customer,
+                        amount=0.00,
+                        value=self.sales_order.shipped_value(),
+                    )
 
     def __str__(self):
         return self.product.name

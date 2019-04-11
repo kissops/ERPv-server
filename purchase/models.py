@@ -95,14 +95,16 @@ class PurchaseOrderLine(models.Model):
                 value=self.received_value(),
             )
         super().save(*args, **kwargs)
-        if False in [self.purchase_order.complete()]:
-            pass
-        else:
-            PurchaseLedger.objects.create(
-                name=self.purchase_order.supplier,
-                amount=0.00,
-                value=self.purchase_order.received_value(),
-            )
+        if self.complete == True:
+            if False in [self.purchase_order.complete()]:
+                pass
+            else:
+                if self.received_quantity != 0.00:
+                    PurchaseLedger.objects.create(
+                        name=self.purchase_order.supplier,
+                        amount=0.00,
+                        value=self.purchase_order.received_value(),
+                    )
 
     def __str__(self):
         return self.product.name
