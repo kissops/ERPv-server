@@ -48,6 +48,8 @@ class PurchaseOrder(models.Model):
         Supplier, on_delete=models.CASCADE, related_name="supplier_purchase_orders"
     )
     due_by = models.DateTimeField(blank=True, null=True)
+    received_on = models.DateTimeField(blank=True, null=True)
+    complete = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["due_by"]
@@ -61,8 +63,12 @@ class PurchaseOrder(models.Model):
     def received_value(self):
         return sum([line.received_value() for line in self.purchase_order_lines.all()])
 
-    def complete(self):
-        return [line.complete for line in self.purchase_order_lines.all()]
+    def save(self, *args, **kwargs):
+        if self.complete == True:
+            PurchaseLedger.objects.create(
+                name=self.pk, amount=0.00, value=self.received_value()
+            )
+        super().save(*args, **kwargs)
 
 
 class PurchaseOrderLine(models.Model):
@@ -83,12 +89,13 @@ class PurchaseOrderLine(models.Model):
     complete_date = models.DateTimeField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        # if line is complete add the product to inventory.
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
             product.quantity = product.quantity + Decimal(self.received_quantity)
             product.save()
             self.complete_date = timezone.now()
-            # create a ledger entry when receiving product
+            # also create a ledger entry when receiving product
             if self.received_quantity != 0.00:
                 InventoryLedger.objects.create(
                     name=self.product.product,
@@ -96,16 +103,6 @@ class PurchaseOrderLine(models.Model):
                     value=self.received_value(),
                 )
         super().save(*args, **kwargs)
-        if self.complete == True:
-            if False in [self.purchase_order.complete()]:
-                pass
-            else:
-                if self.received_quantity != 0.00:
-                    PurchaseLedger.objects.create(
-                        name=self.purchase_order.pk,
-                        amount=0.00,
-                        value=self.purchase_order.received_value(),
-                    )
 
     def __str__(self):
         return self.product.name

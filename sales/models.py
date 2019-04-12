@@ -48,6 +48,8 @@ class SalesOrder(models.Model):
         Customer, on_delete=models.CASCADE, related_name="customer_sales_orders"
     )
     ship_by = models.DateTimeField(blank=True, null=True)
+    shipped_on = models.DateTimeField(blank=True, null=True)
+    complete = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["ship_by"]
@@ -61,8 +63,12 @@ class SalesOrder(models.Model):
     def shipped_value(self):
         return sum([line.shipped_value() for line in self.sales_order_lines.all()])
 
-    def complete(self):
-        return [line.complete for line in self.sales_order_lines.all()]
+    def save(self, *args, **kwargs):
+        if self.complete == True:
+            SalesLedger.objects.create(
+                name=self.pk, amount=0.00, value=self.shipped_value()
+            )
+        super().save(*args, **kwargs)
 
 
 class SalesOrderLine(models.Model):
@@ -81,12 +87,13 @@ class SalesOrderLine(models.Model):
     complete_date = models.DateTimeField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        # if line is complete remove the product from inventory.
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
             product.quantity = product.quantity - Decimal(self.shipped_quantity)
             product.save()
             self.complete_date = timezone.now()
-            # create a ledger entry when shipping product
+            # also create a ledger entry when shipping product
             if self.shipped_quantity != 0.00:
                 InventoryLedger.objects.create(
                     name=self.product.product,
@@ -94,16 +101,6 @@ class SalesOrderLine(models.Model):
                     value=self.shipped_value(),
                 )
         super().save(*args, **kwargs)
-        if self.complete == True:
-            if False in [self.sales_order.complete()]:
-                pass
-            else:
-                if self.shipped_quantity != 0.00:
-                    SalesLedger.objects.create(
-                        name=self.sales_order.pk,
-                        amount=0.00,
-                        value=self.sales_order.shipped_value(),
-                    )
 
     def __str__(self):
         return self.product.name
