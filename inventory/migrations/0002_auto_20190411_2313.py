@@ -5,23 +5,11 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('inventory', '0001_initial'),
-    ]
+    dependencies = [("inventory", "0001_initial")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='bomitem',
-            name='bom',
-        ),
-        migrations.RemoveField(
-            model_name='bomitem',
-            name='product',
-        ),
-        migrations.DeleteModel(
-            name='BillOfMaterials',
-        ),
-        migrations.DeleteModel(
-            name='BOMItem',
-        ),
+        migrations.RemoveField(model_name="bomitem", name="bom"),
+        migrations.RemoveField(model_name="bomitem", name="product"),
+        migrations.DeleteModel(name="BillOfMaterials"),
+        migrations.DeleteModel(name="BOMItem"),
     ]

@@ -5,19 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('sales', '0001_initial'),
-    ]
+    dependencies = [("sales", "0001_initial")]
 
     operations = [
         migrations.AddField(
-            model_name='salesorder',
-            name='complete',
+            model_name="salesorder",
+            name="complete",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='salesorder',
-            name='shipped_on',
+            model_name="salesorder",
+            name="shipped_on",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]
