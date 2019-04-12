@@ -58,7 +58,7 @@ class PurchaseOrder(models.Model):
         return f"{self.pk}"
 
     def value(self):
-        return sum([line.value() for line in self.purchase_order_lines.all()])
+        return sum([line.value for line in self.purchase_order_lines.all()])
 
     def received_value(self):
         return sum([line.received_value() for line in self.purchase_order_lines.all()])
@@ -87,8 +87,14 @@ class PurchaseOrderLine(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
+    value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def save(self, *args, **kwargs):
+        # set the value of the line if not set.
+        if self.value != 0.00:
+            pass
+        else:
+            self.value = self.valued()
         # if line is complete add the product to inventory.
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
@@ -107,8 +113,20 @@ class PurchaseOrderLine(models.Model):
     def __str__(self):
         return self.product.name
 
-    def value(self):
-        return Decimal(self.product.cost) * Decimal(self.quantity)
+    def valued(self):
+        try:
+            v = Decimal(self.product.cost) * Decimal(self.quantity)
+        except:
+            v = 0.00
+        return v
 
     def received_value(self):
-        return Decimal(self.product.cost) * Decimal(self.received_quantity)
+        try:
+            rv = (
+                Decimal(self.value)
+                / Decimal(self.quantity)
+                * Decimal(self.received_quantity)
+            )
+        except:
+            rv = 0.00
+        return round(rv, 2)

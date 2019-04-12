@@ -58,7 +58,7 @@ class SalesOrder(models.Model):
         return f"{self.pk}"
 
     def value(self):
-        return sum([line.value() for line in self.sales_order_lines.all()])
+        return sum([line.value for line in self.sales_order_lines.all()])
 
     def shipped_value(self):
         return sum([line.shipped_value() for line in self.sales_order_lines.all()])
@@ -85,8 +85,14 @@ class SalesOrderLine(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
+    value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def save(self, *args, **kwargs):
+        # set the value of the line if not set.
+        if self.value != 0.00:
+            pass
+        else:
+            self.value = self.valued()
         # if line is complete remove the product from inventory.
         if self.complete == True:
             product = Product.objects.get(pk=self.product.product.pk)
@@ -105,8 +111,20 @@ class SalesOrderLine(models.Model):
     def __str__(self):
         return self.product.name
 
-    def value(self):
-        return Decimal(self.product.price) * Decimal(self.quantity)
+    def valued(self):
+        try:
+            v = Decimal(self.product.price) * Decimal(self.quantity)
+        except:
+            v = 0.00
+        return v
 
     def shipped_value(self):
-        return Decimal(self.product.price) * Decimal(self.shipped_quantity)
+        try:
+            sv = (
+                Decimal(self.value)
+                / Decimal(self.quantity)
+                * Decimal(self.shipped_quantity)
+            )
+        except:
+            sv = 0.00
+        return round(sv, 2)
