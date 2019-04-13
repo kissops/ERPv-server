@@ -14,8 +14,8 @@
                     </div>
                     <div class="list-group list-group-flush">
                         {% if request.user.is_staff %}
-                        <a href="/admin/"
-                            class="list-group-item list-group-item-action py-4">Administration</a>
+                        <a href="/admin/" class="list-group-item list-group-item-action py-4">Administration</a>
+                        <a href="/silk/" class="list-group-item list-group-item-action py-4">Silk</a>
                         {% endif %}
                         <a href="{% url 'index' %}" class="list-group-item list-group-item-action py-4">Dashboards</a>
                     </div>

@@ -6,22 +6,30 @@
     <div class="col">
         <div class="card">
             <div class="card-header bg-light py-4">
-                <strong>Shipment Schedule <br />&nbsp;</strong>
+                <strong>Shipment Schedule</strong>
             </div>
             <div class="container-fluid my-4">
                 <div class="row">
                     <div class="col content">
-                        <div class="text-right mr-3 text-secondary">Ship by Date</div>
-                        <ul class="list-group list-group-flush">
-                            {% for obj in object_list %}
-                            <a href="{% url 'shipment_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
-                                <div class="d-flex justify-content-between">
-                                    <span>{{ obj.pk }} &nbsp; {{ obj.customer }}</span>
-                                    {{ obj.ship_by }}
-                                </div>
-                            </a>
-                            {% endfor %}
-                        </ul>
+                        {% if object_list %}
+                        <div class="text-right mr-3 text-secondary headers">Ship by Date</div>
+                            <ul class="list-group list-group-flush">
+                                {% for obj in object_list %}
+                                <a href="{% url 'shipment_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="mr-3">{{ obj.pk }} &nbsp; {{ obj.customer }}</span>
+                                        {{ obj.ship_by|date:"D dS M Y" }}
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-dismissible alert-dark py-3">
+                            <button type="button" class="close py-3" data-dismiss="alert">&times;</button>
+                            No sales orders scheduled for shipping.
+                        </div>
+                        {% endif %}
                         {% include "layouts/pagination.html" %}
                     </div>
                 </div>

@@ -28,3 +28,12 @@ body {
     cursor: pointer;
 }
 
+.card > .list-group:last-child .list-group-item:last-child {
+	border-bottom-right-radius: 0rem;
+	border-bottom-left-radius: 0rem;
+}
+
+.headers {
+    padding-bottom: .6rem;
+    padding-top: .75rem;
+}
