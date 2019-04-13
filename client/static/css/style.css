@@ -5,10 +5,16 @@ body {
 .content {
     font-size: 115%;
 }
-
+.col-form-label {
+    font-size: 90%;
+}
+.form-control {
+    font-size: 110%;
+}
 .dash-btn {
-    color: #444;
-    font-size: 1.2em;
+    color: #515151;
+    font-size: 1.1em;
+    font-weight: bold;
     line-height: 2.5;
     text-align: center;
     padding-bottom: 2em;
@@ -17,10 +23,15 @@ body {
     margin-top: .5em;
 }
 
+.fas-dash {
+    font-size: 200%;
+    line-height: 2;
+}
+
 .dash-btn:hover {
     background: #F8F9FA;
     box-shadow: 0 0 0 .1rem rgba(167, 167, 167, 0.25);
-    color: #222;
+    color: #252525;
     text-decoration: none;
 }
 

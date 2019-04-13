@@ -1,5 +1,20 @@
 from django.views.generic import ListView, DetailView
-from .models import PurchaseOrder
+from django.views.generic.edit import CreateView
+from .models import Supplier, PurchaseOrder
+
+
+class SupplierCreate(CreateView):
+    model = Supplier
+    fields = ["name", "address", "postcode"]
+
+
+class SupplierList(ListView):
+    model = Supplier
+    paginate_by = 10
+
+
+class SupplierDetail(DetailView):
+    model = Supplier
 
 
 class DeliverySchedule(ListView):

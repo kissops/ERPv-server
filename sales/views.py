@@ -1,5 +1,19 @@
 from django.views.generic import ListView, DetailView
-from .models import SalesOrder
+from django.views.generic.edit import CreateView
+from .models import Customer, SalesOrder
+
+
+class CustomerCreate(CreateView):
+    model = Customer
+
+
+class CustomerList(ListView):
+    model = Customer
+    paginate_by = 10
+
+
+class CustomerDetail(DetailView):
+    model = Customer
 
 
 class ShipmentSchedule(ListView):
