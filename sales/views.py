@@ -5,6 +5,7 @@ from .models import Customer, SalesOrder
 
 class CustomerCreate(CreateView):
     model = Customer
+    fields = ["name", "address", "postcode"]
 
 
 class CustomerList(ListView):

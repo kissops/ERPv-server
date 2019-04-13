@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from inventory.models import Product
 from ledger.models import PurchaseLedger, InventoryLedger
@@ -15,6 +16,9 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):  # new
+        return reverse("supplier_detail", args=[str(self.id)])
 
 
 class PurchasedProduct(models.Model):

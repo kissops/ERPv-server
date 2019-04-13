@@ -11,13 +11,13 @@
             <div class="container-fluid my-4">
                 <div class="row">
                     <div class="col content">
-                        {% if object_list %}
                         <div class="text-right mr-3 text-secondary headers">
-                            &nbsp;
+                            <a href="{% url 'customer_create' %}" class="btn btn-success">Create New</a>
                         </div>
+                        {% if object_list %}
                         <ul class="list-group list-group-flush">
                             {% for obj in object_list %}
-                            <a href="{% url 'delivery_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                            <a href="{% url 'customer_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
                                 <div class="d-flex justify-content-between">
                                     <span class="mr-3">{{ obj.name }}</span>
                                 </div>
