@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_authenticated %}
+<div class="row">
+    {% include "layouts/menu.html" %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header bg-light py-4">
+                <strong>Create New Purchase Order for {{ supplier.name }} </strong>
+            </div>
+            <div class="container-fluid mb-4">
+                <div class="row">
+                    <div class="col content">
+                        <div class="container-fluid my-4">
+                        <form class="row" method="post">{% csrf_token %}
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                            <div class="my-5 text-right">
+                                <button class="btn btn-success px-4" type="submit" value="login">Create</button>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

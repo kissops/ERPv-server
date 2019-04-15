@@ -8,10 +8,49 @@
             <div class="card-header bg-light py-4">
                 <strong>{{ object.name }}</strong>
             </div>
-            <div class="container-fluid my-4">
-                <div class="row">
-                    <div class="col content">
-
+            <div class="container-fluid my-5">
+                <div class="row my-2">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="card my-2">
+                            <div class="card-header py-4">
+                                <strong>Purchase Orders</strong>
+                            </div>
+                            <div class="card-body content">
+                                <div class="text-right mr-3 text-secondary headers">
+                                    <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-success">Create New</a>
+                                </div>
+                                {% if object_list %}
+                                <ul class="list-group list-group-flush">
+                                    {% for obj in object_list %}
+                                    <a href="{% url 'supplier_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="mr-3">{{ obj.name }}</span>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <div class="alert alert-dismissible alert-dark py-3">
+                                    <button type="button" class="close py-3" data-dismiss="alert">&times;</button>
+                                    No purchase orders exist yet for this supplier.
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card my-2">
+                            <div class="card-header py-4">
+                                <strong>Address</strong>
+                            </div>
+                            <div class="card-body content">
+                            <span class="my-2" style="text-transform: capitalize;">
+                            {{ object.address|linebreaksbr }}
+                            </span>
+                            <br />
+                            <span style="line-height: 3;text-transform: uppercase;">{{ object.postcode }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
