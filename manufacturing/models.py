@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from inventory.models import Product
+from ledger.models import ManufacturingLedger, InventoryLedger
 from statistics import mean
 
 
@@ -97,6 +98,13 @@ class Job(models.Model):
             product = Product.objects.get(pk=self.product.pk)
             product.quantity = product.quantity + Decimal(self.quantity)
             product.save()
+            if self.quantity != 0.00:
+                ManufacturingLedger.objects.create(
+                    name=self.product, amount=self.quantity, value=0.00
+                )
+                InventoryLedger.objects.create(
+                    name=self.product, amount=self.quantity, value=0.00
+                )
             self.complete_date = timezone.now()
             if self.bom() is not None:
                 for item in self.bom():
@@ -109,6 +117,10 @@ class Job(models.Model):
                         - item.quantity * Decimal(self.quantity)
                     )
                     product.save()
+                    if product.quantity != 0.00:
+                        InventoryLedger.objects.create(
+                            name=product.name, amount=product.quantity, value=0.00
+                        )
         else:
             if self.bom() is not None:
                 for item in self.bom():
