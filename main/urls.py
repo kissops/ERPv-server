@@ -27,6 +27,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("report_builder/", include("report_builder.urls")),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("inventory/", include("inventory.urls")),
+    path("manufacturing/", include("manufacturing.urls")),
     path("purchase/", include("purchase.urls")),
     path("sales/", include("sales.urls")),
 ]
