@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models
+from ledger.models import InventoryLedger
 
 
 class Warehouse(models.Model):
@@ -29,6 +30,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def ledger(self):
+        return InventoryLedger.objects.filter(name=self.name)
 
     def planned(self):
         try:

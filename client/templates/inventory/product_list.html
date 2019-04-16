@@ -17,7 +17,7 @@
                         {% if object_list %}
                         <ul class="list-group list-group-flush">
                             {% for obj in object_list %}
-                            <a href="" class="list-group-item list-group-item-action py-4">
+                            <a href="{% url 'product_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
                                 <div class="d-flex justify-content-between">
                                     <span class="mr-3">{{ obj.name }}</span>
                                     {{ obj.quantity }}
