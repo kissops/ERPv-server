@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models
+from django.urls import reverse
 from ledger.models import InventoryLedger
 
 
@@ -11,6 +12,9 @@ class Warehouse(models.Model):
 
     def locations(self):
         return self.warehouse_locations.count()
+
+    def get_absolute_url(self):  # new
+        return reverse("warehouse_detail", args=[str(self.id)])
 
 
 class Product(models.Model):
