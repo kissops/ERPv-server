@@ -24,7 +24,7 @@ class PurchaseOrderCreate(CreateView):
 
 class SupplierCreate(CreateView):
     model = Supplier
-    fields = ["name", "address", "postcode"]
+    fields = ["name", "address", "postcode", "phone", "email", "website"]
 
 
 class SupplierList(ListView):
