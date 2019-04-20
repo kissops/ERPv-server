@@ -4,11 +4,42 @@
             <strong>Menu</strong>
         </div>
         <div class="list-group list-group-flush">
-            {% if request.user.is_staff %}
-            <a href="/admin/" class="list-group-item list-group-item-action py-4">Administration</a>
-            <a href="/silk/" class="list-group-item list-group-item-action py-4">Silk</a>
-            {% endif %}
-            <a href="{% url 'index' %}" class="list-group-item list-group-item-action py-4">Dashboards</a>
+            <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Customers
+                    <i class="fas fas-dash fa-shopping-bag"></i>
+                </div>    
+            </a>
+            <a href="{% url 'delivery_schedule' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Delivery Schedule
+                    <i class="fas fas-dash fa-truck-loading"></i>
+                </div>    
+            </a>
+            <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Inventory
+                    <i class="fas fas-dash fa-boxes"></i>
+                </div>    
+            </a>
+            <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Manufacturing
+                    <i class="fas fas-dash fa-industry"></i>
+                </div>    
+            </a>
+            <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Shipment Schedule
+                    <i class="fas fas-dash fa-shipping-fast"></i>
+                </div>    
+            </a>
+            <a href="{% url 'supplier_list' %}" class="list-group-item list-group-item-action py-4">
+                <div class="d-flex justify-content-between">
+                    Suppliers
+                    <i class="fas fas-dash fa-people-carry"></i>
+                </div>    
+            </a>
         </div>
     </div>
 </div>
