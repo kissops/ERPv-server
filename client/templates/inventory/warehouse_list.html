@@ -6,18 +6,18 @@
     <div class="col">
         <div class="card">
             <div class="card-header bg-light py-4">
-                <strong>Customers</strong>
+                <strong>Warehouses</strong>
             </div>
-            <div class="container-fluid my-4">
+            <div class="container-fluid mb-4">
                 <div class="row">
                     <div class="col content">
                         <div class="text-right mr-3 text-secondary headers">
-                            <a href="{% url 'customer_create' %}" class="btn btn-outline-success">Create New</a>
+                            <a href="{% url 'warehouse_create' %}" class="btn btn-outline-success">Create New</a>
                         </div>
                         {% if object_list %}
                         <ul class="list-group list-group-flush">
                             {% for obj in object_list %}
-                            <a href="{% url 'customer_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                            <a href="{% url 'warehouse_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
                                 <div class="d-flex justify-content-between">
                                     <span class="mr-3">{{ obj.name }}</span>
                                 </div>
@@ -25,9 +25,9 @@
                             {% endfor %}
                         </ul>
                         {% else %}
-                        <div class="alert alert-dismissible alert-dark py-3">
+                        <div class="alert alert-dismissible alert-dark py-3 my-4 mx-3">
                             <button type="button" class="close py-3" data-dismiss="alert">&times;</button>
-                            No customers exist yet.
+                            No warehouses exist yet.
                         </div>
                         {% endif %}
                     {% include "layouts/pagination.html" %}

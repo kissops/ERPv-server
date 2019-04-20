@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="row">
+    {% include "layouts/menu.html" %}
+    <div class="col">
+        <div class="card">
+            <div class="card-header bg-light py-4">
+                <strong>{{ object.name }}</strong>
+            </div>
+            <div class="container-fluid mb-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card my-2">
+                            <div class="card-header py-4">
+                                <strong>Locations</strong>
+                            </div>
+                            <div class="card-body content">
+                                <div class="text-right mr-3 text-secondary headers">
+                                    <a href="" class="btn btn-outline-success">Create New</a>
+                                </div>
+                                {% if object_list %}
+                                <ul class="list-group list-group-flush">
+                                    {% for obj in object_list %}
+                                    <a href="{% url 'customer_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="mr-3">{{ obj.name }}</span>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <div class="alert alert-dismissible alert-dark py-3 my-4 mx-3">
+                                    <button type="button" class="close py-3" data-dismiss="alert">&times;</button>
+                                    No locations exist yet in this warehouse.
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

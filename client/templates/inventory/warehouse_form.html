@@ -7,30 +7,17 @@
     <div class="col">
         <div class="card">
             <div class="card-header bg-light py-4">
-                <strong>Create New Supplier</strong>
+                <strong>Create New Warehouse</strong>
             </div>
             <div class="container-fluid mb-4">
                 <div class="row">
                     <div class="col content">
                         <div class="container-fluid my-4">
                         <form class="row" method="post">{% csrf_token %}
-                            <div class="col-lg-4">
-                                <div class="mb-4">
-                                    <div class="">
+                            <div class="col">
+                                <div class="card mb-4">
+                                    <div class="card-body">
                                     {{ form.name|as_crispy_field }}
-                                    <div class="text-primary" style="font-size: 92%;">
-                                    {{ form.phone|as_crispy_field }}
-                                    {{ form.email|as_crispy_field }}
-                                    {{ form.website|as_crispy_field }}
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="">
-                                    {{ form.address|as_crispy_field }}
-                                    <div class="" style="max-width: 10rem;">
-                                        {{ form.postcode|as_crispy_field }}
                                     </div>
                                 </div>
                             </div>

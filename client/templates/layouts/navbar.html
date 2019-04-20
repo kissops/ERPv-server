@@ -25,11 +25,11 @@
             <ul class="navbar-nav ml-auto py-1">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="btn btn-danger btn-block text-center" href="/accounts/logout/?next=/">Logout</a>
+                    <a class="btn btn-outline-danger btn-block text-center" href="/accounts/logout/?next=/">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="btn btn-success btn-block text-center" href="/accounts/login/">Login</a>
+                    <a class="btn btn-outline-success btn-block text-center" href="/accounts/login/">Login</a>
                 </li>
                 {% endif %}
             </ul>

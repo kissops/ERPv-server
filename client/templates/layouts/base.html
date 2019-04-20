@@ -18,8 +18,10 @@
 <body>
     {% include "layouts/navbar.html" %}
     <main class="container-fluid my-4">
+        <div class="mx-3">
         {% block content %}
         {% endblock content %}
+        </div>
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
