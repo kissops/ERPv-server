@@ -24,7 +24,7 @@ class SalesOrderCreate(CreateView):
 
 class CustomerCreate(CreateView):
     model = Customer
-    fields = ["name", "address", "postcode"]
+    fields = ["name", "address", "postcode", "phone", "email", "website"]
 
 
 class CustomerList(ListView):
