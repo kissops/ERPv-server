@@ -1,9 +1,9 @@
 body {
-    background: #F8F9FA;
+    background: #FEFEFE;
 }
 
 .content {
-    font-size: 115%;
+    font-size: 105%;
 }
 
 .col-form-label {
@@ -79,10 +79,45 @@ body {
     margin-left: 0rem;
 }
 
-.bg-info {
-    background-color: rgb(225, 225, 225) !important;
+.btn-group {
+    margin-top: .05rem;
 }
 
-.btn-group {
-    margin-top: .1rem;
+.navbar-brand {
+    font-weight: 300;
+}
+.brand {
+    font-size: 80%;
+    font-weight: 500;
+    color: #999 !important;
+}
+.text-muted {
+    color: #999 !important;
+    font-size: 95%;
+}
+
+.card {
+    border-radius: 0 !important;
+}
+
+.card-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+
+.menu {
+    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,0);
+    box-shadow: 0 0px 0px rgba(0,0,0,0);
+}
+.dropdown-item:hover, .dropdown-item:focus { 
+    background: #252525 !important;
+}
+
+.main {
+    margin-top: 0.01rem;
+}
+
+.list-group-item-action:hover, .list-group-item-action:focus {
+    z-index: 0;
 }

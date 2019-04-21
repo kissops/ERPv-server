@@ -4,7 +4,7 @@
 <div class="row">
     {% include "layouts/menu.html" %}
     <div class="col">
-        <div class="card">
+        <div class="card card-content">
             <div class="card-header bg-light py-4">
                 <strong>Suppliers</strong>
             </div>
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col content">
                         <div class="text-right my-3">
-                            <a href="{% url 'supplier_create' %}" class="btn btn-sm btn-outline-success">Create New</a>
+                            <a href="{% url 'supplier_create' %}" class="btn btn-sm btn-success">Create New</a>
                         </div>
                         {% if object_list %}
                         <ul class="list-group list-group-flush">

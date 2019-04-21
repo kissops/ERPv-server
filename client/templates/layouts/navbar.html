@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">ERPv</a>
+        <a class="navbar-brand" href="{% url 'index' %}">ERP<span class="brand">v</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,79 +8,79 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {% if request.user.is_authenticated %}
             <div class="d-lg-none d-xl-none">
-                <div class="card my-4">
+                <div class="card menu my-4">
                     <div class="card-header bg-light py-4">
                         <strong>Menu</strong>
                     </div>
                     <div class="list-group list-group-flush">
-            <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Customers
-                    <i class="fas fas-dash fa-shopping-bag"></i>
-                </div>    
-            </a>
-            <a href="{% url 'delivery_schedule' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Delivery Schedule
-                    <i class="fas fas-dash fa-truck-loading"></i>
-                </div>    
-            </a>
-            <div class="btn-group">
-                <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="d-flex justify-content-between">
-                        Inventory
-                        <i class="fas fas-dash fa-boxes"></i>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item py-4" href="{% url 'warehouse_list' %}">
-                        <div class="d-flex justify-content-between">
-                            Warehouses
-                            <i class="fas fas-dash fa-warehouse"></i>
+                        <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action py-4">
+                            <div class="d-flex justify-content-between">
+                                Customers
+                                <i class="fas fas-dash fa-shopping-bag"></i>
+                            </div>    
+                        </a>
+                        <a href="{% url 'delivery_schedule' %}" class="list-group-item list-group-item-action py-4">
+                            <div class="d-flex justify-content-between">
+                                Delivery Schedule
+                                <i class="fas fas-dash fa-truck-loading"></i>
+                            </div>    
+                        </a>
+                        <div class="btn-group">
+                            <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="d-flex justify-content-between">
+                                    Inventory
+                                    <i class="fas fas-dash fa-boxes"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item py-4" href="{% url 'warehouse_list' %}">
+                                    <div class="d-flex justify-content-between">
+                                        Warehouses
+                                        <i class="fas fas-dash fa-warehouse"></i>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item py-4" href="{% url 'product_list' %}">
+                                    <div class="d-flex justify-content-between">
+                                        Products
+                                        <i class="fas fas-dash fa-boxes"></i>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </a>
-                    <a class="dropdown-item py-4" href="{% url 'product_list' %}">
-                        <div class="d-flex justify-content-between">
-                            Products
-                            <i class="fas fas-dash fa-boxes"></i>
+                        <div class="btn-group">
+                            <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="d-flex justify-content-between">
+                                    Manufacturing
+                                    <i class="fas fas-dash fa-industry"></i>
+                                </div>    
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item py-4" href="#">
+                                    <div class="d-flex justify-content-between">
+                                        Bill of Materials
+                                        <i class="fas fas-dash fa-cogs"></i>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item py-4" href="{% url 'job_list' %}">
+                                    <div class="d-flex justify-content-between">
+                                        Job List
+                                        <i class="fas fas-dash fa-clipboard-list"></i>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </a>
-                </div>
-            </div>
-            <div class="btn-group">
-                <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="d-flex justify-content-between">
-                        Manufacturing
-                        <i class="fas fas-dash fa-industry"></i>
-                    </div>    
-                </a>
-                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item py-4" href="#">
-                        <div class="d-flex justify-content-between">
-                            Bill of Materials
-                            <i class="fas fas-dash fa-cogs"></i>
-                        </div>
-                    </a>
-                    <a class="dropdown-item py-4" href="{% url 'job_list' %}">
-                        <div class="d-flex justify-content-between">
-                            Job List
-                            <i class="fas fas-dash fa-clipboard-list"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Shipment Schedule
-                    <i class="fas fas-dash fa-shipping-fast"></i>
-                </div>    
-            </a>
-            <a href="{% url 'supplier_list' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Suppliers
-                    <i class="fas fas-dash fa-people-carry"></i>
-                </div>    
-            </a>
+                        <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
+                            <div class="d-flex justify-content-between">
+                                Shipment Schedule
+                                <i class="fas fas-dash fa-shipping-fast"></i>
+                            </div>    
+                        </a>
+                        <a href="{% url 'supplier_list' %}" class="list-group-item list-group-item-action py-4">
+                            <div class="d-flex justify-content-between">
+                                Suppliers
+                                <i class="fas fas-dash fa-people-carry"></i>
+                            </div>    
+                        </a>
                     </div>
                 </div>
             </div>

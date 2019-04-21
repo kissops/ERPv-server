@@ -4,7 +4,7 @@
 <div class="row">
     {% include "layouts/menu.html" %}
     <div class="col">
-        <div class="card">
+        <div class="card card-content">
             <div class="card-header bg-light py-4">
                 <div class="d-flex justify-content-between">
                     <strong>{{ object.name }}</strong>
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="card-body content">
                                     <div class="text-right">
-                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-outline-success">Create New</a>
+                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-success">Create New</a>
                                     </div>
 
                                 </div>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="card-body content">
                                     <div class="text-right">
-                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-outline-success">Create New</a>
+                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-success">Create New</a>
                                     </div>
                                     <div class="text-right mt-3 text-secondary headers">Due by Date</div>
                                     <ul class="list-group list-group-flush">
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="card-body content">
                                     <div class="text-right">
-                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-outline-success">Create New</a>
+                                        <a href="{% url 'purchase_order_create' pk=object.pk %}" class="btn btn-sm btn-success">Create New</a>
                                     </div>
 
                                 </div>

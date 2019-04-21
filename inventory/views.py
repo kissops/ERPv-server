@@ -8,6 +8,11 @@ class ProductList(ListView):
     paginate_by = 10
 
 
+class ProductCreate(CreateView):
+    model = Product
+    fields = ["name"]
+
+
 class ProductDetail(DetailView):
     model = Product
 

@@ -87,6 +87,9 @@ class Product(models.Model):
         except:
             return 0
 
+    def get_absolute_url(self):  # new
+        return reverse("product_detail", args=[str(self.id)])
+
 
 class Location(models.Model):
     warehouse = models.ForeignKey(

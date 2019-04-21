@@ -1,37 +1,37 @@
-<div class="col d-none d-lg-block d-xl-block" style="max-width: 20rem;">
-    <div class="card">
+<div class="col d-none d-lg-block d-xl-block" style="max-width: 20rem; margin-right: -29.5px;">
+    <div class="card bg-dark menu">
         <div class="card-header bg-light py-4">
-            <strong>Menu</strong>
+            <strong class="pl-3">Menu</strong>
         </div>
         <div class="list-group list-group-flush">
             <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between ml-3">
                     Customers
                     <i class="fas fas-dash fa-shopping-bag"></i>
                 </div>    
             </a>
             <a href="{% url 'delivery_schedule' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between ml-3">
                     Delivery Schedule
                     <i class="fas fas-dash fa-truck-loading"></i>
                 </div>    
             </a>
             <div class="btn-group">
                 <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between ml-3">
                         Inventory
                         <i class="fas fas-dash fa-boxes"></i>
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item py-4" href="{% url 'warehouse_list' %}">
-                        <div class="d-flex justify-content-between">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item py-4 bg-dark" href="{% url 'warehouse_list' %}">
+                        <div class="d-flex justify-content-between ml-3 text-white">
                             Warehouses
                             <i class="fas fas-dash fa-warehouse"></i>
                         </div>
                     </a>
-                    <a class="dropdown-item py-4" href="{% url 'product_list' %}">
-                        <div class="d-flex justify-content-between">
+                    <a class="dropdown-item py-4 bg-dark" href="{% url 'product_list' %}">
+                        <div class="d-flex justify-content-between ml-3 text-white">
                             Products
                             <i class="fas fas-dash fa-boxes"></i>
                         </div>
@@ -40,20 +40,20 @@
             </div>
             <div class="btn-group">
                 <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between ml-3">
                         Manufacturing
                         <i class="fas fas-dash fa-industry"></i>
                     </div>    
                 </a>
-                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item py-4" href="#">
-                        <div class="d-flex justify-content-between">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item py-4 bg-dark" href="#">
+                        <div class="d-flex justify-content-between ml-3 text-white">
                             Bill of Materials
                             <i class="fas fas-dash fa-cogs"></i>
                         </div>
                     </a>
-                    <a class="dropdown-item py-4" href="{% url 'job_list' %}">
-                        <div class="d-flex justify-content-between">
+                    <a class="dropdown-item py-4 bg-dark" href="{% url 'job_list' %}">
+                        <div class="d-flex justify-content-between ml-3 text-white">
                             Job List
                             <i class="fas fas-dash fa-clipboard-list"></i>
                         </div>
@@ -61,13 +61,13 @@
                 </div>
             </div>
             <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between ml-3">
                     Shipment Schedule
                     <i class="fas fas-dash fa-shipping-fast"></i>
                 </div>    
             </a>
             <a href="{% url 'supplier_list' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between ml-3">
                     Suppliers
                     <i class="fas fas-dash fa-people-carry"></i>
                 </div>    
