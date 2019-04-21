@@ -5,12 +5,15 @@ body {
 .content {
     font-size: 115%;
 }
+
 .col-form-label {
     font-size: 90%;
 }
+
 .form-control {
     font-size: 110%;
 }
+
 .dash-btn {
     color: #515151;
     font-size: 1.1em;
@@ -57,9 +60,29 @@ body {
     line-height: 1.5;
 }
 
-.nav-tabs .nav-link.active, .nav-tabs .nav-link.active:focus {
-    border: none;
-    -webkit-box-shadow: inset 0 -2px 0 #2196F3;
-    box-shadow: inset 0 -2px 0 #2196F3;
-    color: #2196F3;
+.btn-sm {
+    line-height: 2.5;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.dropdown-menu {
+    border-radius: 0 !important;
+    padding: 0;
+    min-width: 18.3rem;
+    margin: 0;
+    margin-left: -.5rem !important;
+}
+
+.dropdown-menu.dropdown-menu-right.show {
+    transform: translate3d(0px, 0px, 0px);
+    margin-left: 0rem;
+}
+
+.bg-info {
+    background-color: rgb(225, 225, 225) !important;
+}
+
+.btn-group {
+    margin-top: .1rem;
 }

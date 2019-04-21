@@ -16,18 +16,50 @@
                     <i class="fas fas-dash fa-truck-loading"></i>
                 </div>    
             </a>
-            <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Inventory
-                    <i class="fas fas-dash fa-boxes"></i>
-                </div>    
-            </a>
-            <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4">
-                <div class="d-flex justify-content-between">
-                    Manufacturing
-                    <i class="fas fas-dash fa-industry"></i>
-                </div>    
-            </a>
+            <div class="btn-group">
+                <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex justify-content-between">
+                        Inventory
+                        <i class="fas fas-dash fa-boxes"></i>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item py-4" href="{% url 'warehouse_list' %}">
+                        <div class="d-flex justify-content-between">
+                            Warehouses
+                            <i class="fas fas-dash fa-warehouse"></i>
+                        </div>
+                    </a>
+                    <a class="dropdown-item py-4" href="{% url 'product_list' %}">
+                        <div class="d-flex justify-content-between">
+                            Products
+                            <i class="fas fas-dash fa-boxes"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex justify-content-between">
+                        Manufacturing
+                        <i class="fas fas-dash fa-industry"></i>
+                    </div>    
+                </a>
+                <div class="dropdown-menu dropdown-menu-right bg-info" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item py-4" href="#">
+                        <div class="d-flex justify-content-between">
+                            Bill of Materials
+                            <i class="fas fas-dash fa-cogs"></i>
+                        </div>
+                    </a>
+                    <a class="dropdown-item py-4" href="{% url 'job_list' %}">
+                        <div class="d-flex justify-content-between">
+                            Job List
+                            <i class="fas fas-dash fa-clipboard-list"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
                 <div class="d-flex justify-content-between">
                     Shipment Schedule
