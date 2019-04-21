@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Supplier, PurchaseOrder
 
 
@@ -23,6 +23,11 @@ class PurchaseOrderCreate(CreateView):
 
 
 class SupplierCreate(CreateView):
+    model = Supplier
+    fields = ["name", "address", "postcode", "phone", "email", "website"]
+
+
+class SupplierUpdate(UpdateView):
     model = Supplier
     fields = ["name", "address", "postcode", "phone", "email", "website"]
 

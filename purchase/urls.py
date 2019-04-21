@@ -5,6 +5,7 @@ from .views import (
     PurchaseOrderCreate,
     SupplierCreate,
     SupplierDetail,
+    SupplierUpdate,
     SupplierList,
 )
 
@@ -17,6 +18,9 @@ urlpatterns = [
         "suppliers/<int:pk>/purchase_order/create/",
         PurchaseOrderCreate.as_view(),
         name="purchase_order_create",
+    ),
+    path(
+        "suppliers/<int:pk>/update/", SupplierUpdate.as_view(), name="supplier_update"
     ),
     path("suppliers/create/", SupplierCreate.as_view(), name="supplier_create"),
 ]
