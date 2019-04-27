@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="card-body content">
                                     <div class="text-right">
-                                        <a href="{% url 'sales_order_create' pk=object.pk %}" class="btn btn-sm btn-success">Create New</a>
+                                        <a href="{% url 'sales_order_create' pk=object.pk %}" class="btn btn-sm disabled btn-success">Create New</a>
                                     </div>
 
                                 </div>
@@ -52,7 +52,7 @@
                                     <div class="text-right mt-3 text-secondary headers">Ship by Date</div>
                                     <ul class="list-group list-group-flush">
                                         {% for obj in object.customer_sales_orders.all %}
-                                        <a href="{% url 'customer_detail' pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
+                                        <a href="{% url 'sales_order_detail' pk2=object.pk pk=obj.pk %}" class="list-group-item list-group-item-action py-4">
                                             <div class="d-flex justify-content-between">
                                                 <span class="mr-3">{{ obj.pk }}</span>
                                                 {{ obj.ship_by|date:"D dS M Y" }}
@@ -70,7 +70,17 @@
                                     <div class="text-right">
                                         <a href="{% url 'sales_order_create' pk=object.pk %}" class="btn btn-sm btn-success">Create New</a>
                                     </div>
-
+                                    <div class="text-right mt-3 text-secondary headers">Customer Product ID</div>
+                                    <ul class="list-group list-group-flush">
+                                        {% for obj in object.customer_sold_products.all %}
+                                        <a href="{% url 'product_detail' pk=obj.product.pk %}" class="list-group-item list-group-item-action py-4">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="mr-3">{{ obj.product.name }}</span>
+                                                {{ obj.name }}
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                    </ul>
                                 </div>
                             </div>
                         </div>

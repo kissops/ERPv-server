@@ -4,6 +4,10 @@ from django.views.generic.edit import CreateView, UpdateView
 from .models import Customer, SalesOrder
 
 
+class SalesOrderDetail(DetailView):
+    model = SalesOrder
+
+
 class SalesOrderCreate(CreateView):
     model = SalesOrder
     fields = ["customer"]
