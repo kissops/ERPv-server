@@ -14,6 +14,9 @@ class Supplier(models.Model):
     email = models.CharField(max_length=128, blank=True)
     website = models.CharField(max_length=256, blank=True)
 
+    class Meta:
+        ordering = ["name"]
+
     def __str__(self):
         return self.name
 
@@ -30,6 +33,9 @@ class PurchasedProduct(models.Model):
     )
     name = models.CharField(max_length=128)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -92,6 +98,9 @@ class PurchaseOrderLine(models.Model):
     complete = models.BooleanField(default=False)
     complete_date = models.DateTimeField(blank=True, null=True)
     value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    class Meta:
+        ordering = ["product__name"]
 
     def save(self, *args, **kwargs):
         # set the value of the line if not set.
