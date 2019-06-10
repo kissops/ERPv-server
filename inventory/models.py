@@ -7,6 +7,9 @@ from ledger.models import InventoryLedger
 class Warehouse(models.Model):
     name = models.CharField(max_length=128, unique=True)
 
+    class Meta:
+        ordering = ["name"]
+
     def __str__(self):
         return self.name
 
@@ -99,6 +102,7 @@ class Location(models.Model):
     name = models.CharField(max_length=128)
 
     class Meta:
+        ordering = ["name"]
         unique_together = ("warehouse", "name")
 
     def __str__(self):
