@@ -10,11 +10,12 @@ class Ledger(models.Model):
     date = models.DateTimeField(default=timezone.now)
 
     class Meta:
+        ordering = ["-date"]
         abstract = True
 
 
 class InventoryLedger(Ledger):
-    class Meta:
+    class Meta(Ledger.Meta):
         verbose_name_plural = "Inventory ledger"
 
     def __str__(self):
@@ -22,7 +23,7 @@ class InventoryLedger(Ledger):
 
 
 class ManufacturingLedger(Ledger):
-    class Meta:
+    class Meta(Ledger.Meta):
         verbose_name_plural = "Manufacturing ledger"
 
     def __str__(self):
@@ -30,7 +31,7 @@ class ManufacturingLedger(Ledger):
 
 
 class PurchaseLedger(Ledger):
-    class Meta:
+    class Meta(Ledger.Meta):
         verbose_name_plural = "Purchase ledger"
 
     def __str__(self):
@@ -38,7 +39,7 @@ class PurchaseLedger(Ledger):
 
 
 class SalesLedger(Ledger):
-    class Meta:
+    class Meta(Ledger.Meta):
         verbose_name_plural = "Sales ledger"
 
     def __str__(self):
