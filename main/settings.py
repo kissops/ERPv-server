@@ -120,7 +120,7 @@ DATABASES = {
 
 DATABASES["default"].update(
     dj_database_url.config(
-        default=os.getenv("DATABASE_URL"), conn_max_age=500, ssl_require=True
+        default=os.getenv("DATABASE_URL"), conn_max_age=500, ssl_require=False
     )
 )
 
