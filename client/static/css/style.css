@@ -1,123 +1,51 @@
+@import url("https://fonts.googleapis.com/css?family=Coda:400,800|Inconsolata:400,700&display=swap");
 body {
-    background: #FEFEFE;
+  font-family: 'Inconsolata', monospace;
+  background-color: #00232c;
 }
 
-.content {
-    font-size: 105%;
-}
-
-.col-form-label {
-    font-size: 90%;
-}
-
-.form-control {
-    font-size: 110%;
-}
-
-.dash-btn {
-    color: #515151;
-    font-size: 1.1em;
-    font-weight: bold;
-    line-height: 2.5;
-    text-align: center;
-    padding-bottom: 2em;
-    padding-top: 2em;
-    margin-bottom: .5em;
-    margin-top: .5em;
-}
-
-.fas-dash {
-    font-size: 160%;
-}
-
-.dash-btn:hover {
-    background: #F8F9FA;
-    box-shadow: 0 0 0 .1rem rgba(167, 167, 167, 0.25);
-    color: #252525;
-    text-decoration: none;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.card > .list-group:last-child .list-group-item:last-child {
-	border-bottom-right-radius: 0rem;
-	border-bottom-left-radius: 0rem;
-}
-
-.headers {
-    padding-bottom: .6rem;
-    padding-top: .75rem;
-}
-
-.nav-tabs {
-    font-weight: 500;
-    line-height: 3;
-}
-
-.btn {
-    line-height: 1.5;
-}
-
-.btn-sm {
-    line-height: 2.5;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.dropdown-menu {
-    border-radius: 0 !important;
-    padding: 0;
-    min-width: 18.3rem;
-    margin: 0;
-    margin-left: -.5rem !important;
-}
-
-.dropdown-menu.dropdown-menu-right.show {
-    transform: translate3d(0px, 0px, 0px);
-    margin-left: 0rem;
-}
-
-.btn-group {
-    margin-top: .05rem;
+.navbar-dark .navbar-toggler {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .navbar-brand {
-    font-weight: 300;
-}
-.brand {
-    font-size: 80%;
-    font-weight: 500;
-    color: #999 !important;
-}
-.text-muted {
-    color: #999 !important;
-    font-size: 95%;
+  font-family: 'Coda', cursive;
 }
 
 .card {
-    border-radius: 0 !important;
+  border-radius: 5px;
 }
 
-.card-content {
-    padding-left: 1rem;
-    padding-right: 1rem;
-
+.card-header {
+  font-family: 'Coda', cursive;
+  font-weight: 400;
 }
 
-.menu {
-    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,0);
-    box-shadow: 0 0px 0px rgba(0,0,0,0);
-}
-.dropdown-item:hover, .dropdown-item:focus { 
-    background: #252525 !important;
+.btn {
+  font-weight: 400;
+  font-family: 'Coda', cursive;
 }
 
-.main {
-    margin-top: 0.01rem;
+.btn-lg {
+  font-size: 100%;
+  line-height: 2;
 }
 
-.list-group-item-action:hover, .list-group-item-action:focus {
-    z-index: 0;
+.login-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 80vh;
 }
+/*# sourceMappingURL=style.css.map */

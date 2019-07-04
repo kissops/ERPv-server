@@ -3,9 +3,10 @@ RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 WORKDIR /ERPv/
 
 FROM base AS build
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY Pipfile* ./
+RUN pip install pipenv && pipenv install --system --deploy
 
 FROM build AS final
 COPY . .
+ENTRYPOINT [ "pipenv", "run" ]
 CMD [ "gunicorn", "main.wsgi", "-b", "0.0.0.0:8000", "-w", "3" ]

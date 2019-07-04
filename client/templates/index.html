@@ -1,18 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 {% if request.user.is_authenticated %}
-<div class="row">
-    {% include "layouts/menu.html" %}
-    <div class="col">
-        <div class="card">
-            <div class="card-header bg-light py-4">
-                <strong>Dashboard</strong>
-            </div>
-            <div class="container-fluid my-4">
-       
-            </div>
-        </div>
-    </div>
-</div>
+
 {% endif %}
 {% endblock content %}

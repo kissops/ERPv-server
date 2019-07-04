@@ -1,98 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">ERP<span class="brand">v</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        
+        <button class="navbar-toggler my-3" style="line-height: 1.4;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% if request.user.is_authenticated %}
-            <div class="d-lg-none d-xl-none">
-                <div class="card menu my-4">
-                    <div class="card-header bg-light py-4">
-                        <strong>Menu</strong>
-                    </div>
-                    <div class="list-group list-group-flush">
-                        <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action py-4">
-                            <div class="d-flex justify-content-between">
-                                Customers
-                                <i class="fas fas-dash fa-shopping-bag"></i>
-                            </div>    
-                        </a>
-                        <a href="{% url 'delivery_schedule' %}" class="list-group-item list-group-item-action py-4">
-                            <div class="d-flex justify-content-between">
-                                Delivery Schedule
-                                <i class="fas fas-dash fa-truck-loading"></i>
-                            </div>    
-                        </a>
-                        <div class="btn-group">
-                            <a href="{% url 'inventory_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <div class="d-flex justify-content-between">
-                                    Inventory
-                                    <i class="fas fas-dash fa-boxes"></i>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item py-4 bg-dark text-white" href="{% url 'warehouse_list' %}">
-                                    <div class="d-flex justify-content-between">
-                                        Warehouses
-                                        <i class="fas fas-dash fa-warehouse"></i>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item py-4 bg-dark text-white" href="{% url 'product_list' %}">
-                                    <div class="d-flex justify-content-between">
-                                        Products
-                                        <i class="fas fas-dash fa-boxes"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <a href="{% url 'manufacturing_dashboard' %}" class="list-group-item list-group-item-action py-4" id="dropdownMenuButton" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <div class="d-flex justify-content-between">
-                                    Manufacturing
-                                    <i class="fas fas-dash fa-industry"></i>
-                                </div>    
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item py-4 bg-dark text-white" href="#">
-                                    <div class="d-flex justify-content-between">
-                                        Bill of Materials
-                                        <i class="fas fas-dash fa-cogs"></i>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item py-4 bg-dark text-white" href="{% url 'job_list' %}">
-                                    <div class="d-flex justify-content-between">
-                                        Job List
-                                        <i class="fas fas-dash fa-clipboard-list"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <a href="{% url 'shipment_schedule' %}" class="list-group-item list-group-item-action py-4">
-                            <div class="d-flex justify-content-between">
-                                Shipment Schedule
-                                <i class="fas fas-dash fa-shipping-fast"></i>
-                            </div>    
-                        </a>
-                        <a href="{% url 'supplier_list' %}" class="list-group-item list-group-item-action py-4">
-                            <div class="d-flex justify-content-between">
-                                Suppliers
-                                <i class="fas fas-dash fa-people-carry"></i>
-                            </div>    
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            <ul class="navbar-nav ml-auto py-1">
+            <hr style="border-top: 1px solid rgba(255,255,255,0.2);" />
+            <ul class="navbar-nav ml-auto my-2">
                 {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="btn btn-danger btn-block text-center" href="/accounts/logout/?next=/">Logout</a>
+                {% if request.user.is_superuser %}
+                <li class="nav-item text-right mx-1">
+                    <a class="btn btn-info my-2" href="/admin/">Admin <i class="fas fa-fw fa-user"></i></a>
+                </li>
+                {% endif %}
+                <li class="nav-item text-right mx-1">
+                    <a class="btn btn-danger my-2" href="/accounts/logout/?next=/">Logout {{ request.user }} <i class="fas fa-fw fa-user"></i></a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="btn btn-success btn-block text-center" href="/accounts/login/">Login</a>
+                <li class="nav-item text-right mx-1">
+                    <a class="btn btn-success my-2" href="/accounts/login/">Login</a>
                 </li>
                 {% endif %}
             </ul>
