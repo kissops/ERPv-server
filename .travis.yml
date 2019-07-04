@@ -5,7 +5,7 @@ python:
   - "3.7"
 
 install:
-  - "pip install pipenv && pipenv install --system --deploy"
+  - "pip install pipenv && pipenv install -d"
 
 env:
   - SECRETKEY=testing
