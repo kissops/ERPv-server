@@ -4,11 +4,11 @@
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
-<div class="row">
-    <div class="col-lg-4 offset-lg-4">
-        <div class="card">
-            <div class="card-header bg-light py-4">
-                <strong>Login</strong>
+<div class="login-form">
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10">
+        <div class="card bg-dark text-white">
+            <div class="card-header bg-success text-white py-4">
+                Login
             </div>
             <div class="row my-4">
                 <div class="col-8 offset-2">
@@ -16,7 +16,7 @@
                         {% csrf_token %}
                         {{ form|crispy}}
                         <div class="my-5">
-                            <button class="btn btn-block btn-success" type="submit" value="login">Submit</button>
+                            <button class="btn btn-lg btn-block btn-success" type="submit" value="login">Submit</button>
                         </div>
                     </form>
                 </div>
