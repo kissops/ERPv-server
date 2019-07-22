@@ -1,12 +1,10 @@
-from django.urls import path
-from django.views.generic import TemplateView
-from .views import JobList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
 
-urlpatterns = [
-    path(
-        "dashboard/",
-        TemplateView.as_view(template_name="manufacturing/index.html"),
-        name="manufacturing_dashboard",
-    ),
-    path("jobs/", JobList.as_view(), name="job_list"),
-]
+router = DefaultRouter()
+router.register(r"bill_of_materials", views.BillOfMaterialsViewSet)
+router.register(r"bom_items", views.BOMItemViewSet)
+router.register(r"jobs", views.JobViewSet)
+
+urlpatterns = [path("", include(router.urls))]
