@@ -1,12 +1,13 @@
 # ERPv
 
-Hybrid Enterprise Resource Planning.
-
 [![Build Status](https://travis-ci.com/kissops/ERPv.svg?branch=master)](https://travis-ci.com/kissops/ERPv)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-black.svg)](https://github.com/ambv/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+![ERPv](erpv.png "ERPv")
+
+Open Source Hybrid Enterprise Resource Planning.
 
 ## Documentation
 
-Refer to the [ERPv wiki!](https://github.com/kissops/ERPv/wiki)
+* [Development Setup](https://github.com/kissops/ERPv/wiki/Development-Setup)
