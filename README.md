@@ -1,4 +1,4 @@
-# ERPv
+# ERPv server
 
 [![Build Status](https://travis-ci.com/kissops/ERPv.svg?branch=master)](https://travis-ci.com/kissops/ERPv)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-black.svg)](https://github.com/ambv/black)
