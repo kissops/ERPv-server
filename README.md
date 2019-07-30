@@ -10,4 +10,4 @@ Open Source Hybrid Enterprise Resource Planning.
 
 ## Documentation
 
-* [Development Setup](https://github.com/kissops/ERPv/wiki/Development-Setup)
+* [Development Setup](https://github.com/kissops/ERPv.server/wiki/Development-Setup)
