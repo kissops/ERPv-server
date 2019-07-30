@@ -6,7 +6,7 @@
 
 ![ERPv](erpv.png "ERPv")
 
-Open Source Hybrid Enterprise Resource Planning.
+Open Source Hybrid Enterprise Resource Planning Server.
 
 ## Documentation
 
