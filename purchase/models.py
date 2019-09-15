@@ -24,6 +24,20 @@ class Supplier(models.Model):
         return reverse("supplier_detail", args=[str(self.id)])
 
 
+class SupplierContact(models.Model):
+    supplier = models.ForeignKey(
+        Supplier, on_delete=models.CASCADE, related_name="supplier_contacts"
+    )
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+
+    class Meta:
+        ordering = ["last_name", "first_name"]
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
 class PurchasedProduct(models.Model):
     supplier = models.ForeignKey(
         Supplier, on_delete=models.CASCADE, related_name="supplier_products"

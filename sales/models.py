@@ -24,6 +24,20 @@ class Customer(models.Model):
         return reverse("customer_detail", args=[str(self.id)])
 
 
+class CustomerContact(models.Model):
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="customer_contacts"
+    )
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+
+    class Meta:
+        ordering = ["last_name", "first_name"]
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
 class SoldProduct(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="customer_sold_products"
