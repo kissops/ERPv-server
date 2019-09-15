@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer, SoldProduct, SalesOrder, SalesOrderLine
+from .models import Customer, CustomerContact, SoldProduct, SalesOrder, SalesOrderLine
 
 
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,12 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             "email",
             "website",
         ]
+
+
+class CustomerContactSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CustomerContact
+        fields = ["url", "id", "customer", "first_name", "last_name"]
 
 
 class SoldProductSerializer(serializers.HyperlinkedModelSerializer):

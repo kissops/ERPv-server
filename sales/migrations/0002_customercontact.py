@@ -6,21 +6,32 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('sales', '0001_initial'),
-    ]
+    dependencies = [("sales", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='CustomerContact',
+            name="CustomerContact",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=128)),
-                ('last_name', models.CharField(max_length=128)),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customer_contacts', to='sales.Customer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=128)),
+                ("last_name", models.CharField(max_length=128)),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="customer_contacts",
+                        to="sales.Customer",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['last_name', 'first_name'],
-            },
-        ),
+            options={"ordering": ["last_name", "first_name"]},
+        )
     ]

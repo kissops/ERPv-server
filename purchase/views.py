@@ -1,6 +1,13 @@
-from .models import Supplier, PurchasedProduct, PurchaseOrder, PurchaseOrderLine
+from .models import (
+    Supplier,
+    SupplierContact,
+    PurchasedProduct,
+    PurchaseOrder,
+    PurchaseOrderLine,
+)
 from .serializers import (
     SupplierSerializer,
+    SupplierContactSerializer,
     PurchasedProductSerializer,
     PurchaseOrderSerializer,
     PurchaseOrderLineSerializer,
@@ -11,6 +18,11 @@ from rest_framework import viewsets
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
+
+
+class SupplierContactViewSet(viewsets.ModelViewSet):
+    queryset = SupplierContact.objects.all()
+    serializer_class = SupplierContactSerializer
 
 
 class PurchasedProductViewSet(viewsets.ModelViewSet):

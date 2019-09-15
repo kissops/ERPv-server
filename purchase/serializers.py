@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import Supplier, PurchasedProduct, PurchaseOrder, PurchaseOrderLine
+from .models import (
+    Supplier,
+    SupplierContact,
+    PurchasedProduct,
+    PurchaseOrder,
+    PurchaseOrderLine,
+)
 
 
 class SupplierSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +21,12 @@ class SupplierSerializer(serializers.HyperlinkedModelSerializer):
             "email",
             "website",
         ]
+
+
+class SupplierContactSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SupplierContact
+        fields = ["url", "id", "supplier", "first_name", "last_name"]
 
 
 class PurchasedProductSerializer(serializers.HyperlinkedModelSerializer):
