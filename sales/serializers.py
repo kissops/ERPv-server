@@ -26,7 +26,7 @@ class CustomerContactSerializer(serializers.HyperlinkedModelSerializer):
 class SoldProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SoldProduct
-        fields = ["url", "id", "customer", "product", "name", "cost", "on_order"]
+        fields = ["url", "id", "customer", "product", "name", "sold"]
 
 
 class SalesOrderSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,7 +36,6 @@ class SalesOrderSerializer(serializers.HyperlinkedModelSerializer):
             "url",
             "id",
             "customer",
-            "due_by",
             "shipped_on",
             "complete",
             "value",
