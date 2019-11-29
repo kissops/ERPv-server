@@ -62,7 +62,10 @@ class BOMItem(models.Model):
 
     def cost(self):
         # return an average of all purchased product costs.
-        average = mean(p.cost for p in self.product.product_purchased_product.all())
+        try:
+            average = mean(p.cost for p in self.product.product_purchased_product.all())
+        except:
+            average = Decimal(0.00)
         return average * Decimal(self.quantity)
 
 
