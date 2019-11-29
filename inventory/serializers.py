@@ -3,9 +3,13 @@ from .models import Warehouse, Product, Location
 
 
 class WarehouseSerializer(serializers.HyperlinkedModelSerializer):
+    warehouse_locations = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="location-detail"
+    )
+
     class Meta:
         model = Warehouse
-        fields = ["url", "id", "name", "locations"]
+        fields = ["url", "id", "name", "locations", "warehouse_locations"]
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):

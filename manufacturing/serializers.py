@@ -3,9 +3,13 @@ from .models import BillOfMaterials, BOMItem, Job
 
 
 class BillOfMaterialsSerializer(serializers.HyperlinkedModelSerializer):
+    bom_items = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="bomitem-detail"
+    )
+
     class Meta:
         model = BillOfMaterials
-        fields = ["url", "id", "product", "labour_cost", "total_cost"]
+        fields = ["url", "id", "product", "labour_cost", "total_cost", "bom_items"]
 
 
 class BOMItemSerializer(serializers.HyperlinkedModelSerializer):

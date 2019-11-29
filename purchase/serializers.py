@@ -36,6 +36,10 @@ class PurchasedProductSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PurchaseOrderSerializer(serializers.HyperlinkedModelSerializer):
+    purchase_order_lines = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="purchaseorderline-detail"
+    )
+
     class Meta:
         model = PurchaseOrder
         fields = [
@@ -47,6 +51,7 @@ class PurchaseOrderSerializer(serializers.HyperlinkedModelSerializer):
             "complete",
             "value",
             "received_value",
+            "purchase_order_lines",
         ]
 
 
