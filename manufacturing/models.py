@@ -70,10 +70,6 @@ class BOMItem(models.Model):
 
 
 class Job(models.Model):
-    """
-    Job model: 
-    """
-
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_jobs"
     )
