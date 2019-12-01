@@ -9,7 +9,7 @@ class WarehouseSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Warehouse
-        fields = ["url", "id", "name", "locations", "warehouse_locations"]
+        fields = ["url", "id", "name", "location_count", "warehouse_locations"]
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
