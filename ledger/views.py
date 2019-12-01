@@ -32,8 +32,3 @@ class PurchaseLedgerViewSet(viewsets.ModelViewSet):
 class SalesLedgerViewSet(viewsets.ModelViewSet):
     queryset = SalesLedger.objects.all()
     serializer_class = SalesLedgerSerializer
-
-
-class InventoryLedgerViewSet(viewsets.ModelViewSet):
-    queryset = InventoryLedger.objects.all()
-    serializer_class = InventoryLedgerSerializer
