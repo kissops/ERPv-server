@@ -13,7 +13,7 @@ class Warehouse(models.Model):
     def __str__(self):
         return self.name
 
-    def locations(self):
+    def location_count(self):
         return self.warehouse_locations.count()
 
     def get_absolute_url(self):  # new
@@ -21,10 +21,6 @@ class Warehouse(models.Model):
 
 
 class Product(models.Model):
-    """
-    Product model: 
-    """
-
     name = models.CharField(max_length=128, unique=True)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     allocated_for_jobs = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -90,7 +86,7 @@ class Product(models.Model):
         except:
             return 0
 
-    def get_absolute_url(self):  # new
+    def get_absolute_url(self):
         return reverse("product_detail", args=[str(self.id)])
 
 
