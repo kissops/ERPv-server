@@ -31,5 +31,4 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             "bom_allocated",
             "complete",
             "complete_date",
-            "bom",
         ]
