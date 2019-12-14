@@ -25,6 +25,7 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             "url",
             "id",
             "product",
+            "product_name",
             "quantity",
             "priority",
             "created_date",
@@ -32,3 +33,8 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             "complete",
             "complete_date",
         ]
+
+    product_name = serializers.SerializerMethodField("get_product_name")
+
+    def get_product_name(self, obj):
+        return obj.product.name
