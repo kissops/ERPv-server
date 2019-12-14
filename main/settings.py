@@ -94,7 +94,7 @@ DATABASES = {
 
 DATABASES["default"].update(
     dj_database_url.config(
-        default=os.getenv("DATABASE_URL"), conn_max_age=500, ssl_require=False
+        default=os.getenv("DATABASE_URL"), conn_max_age=500, ssl_require=True
     )
 )
 
@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = "en-GB"
+LANGUAGE_CODE = "en-gb"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -125,7 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, f"client{os.sep}staticfiles")
 STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, f"client{os.sep}static")]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),

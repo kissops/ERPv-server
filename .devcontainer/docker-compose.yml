@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   app:
@@ -6,24 +6,27 @@ services:
     # new files getting created as root, but you may need to update the USER_UID
     # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
     # user: vscode
-
-    build: 
+    build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-
     volumes:
       - ..:/workspace
-      
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
-    
-    links: 
+    links:
       - db
-    
+
   db:
-    image: postgres
+    build: ./postgres/
     restart: unless-stopped
-    ports: 
+    ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: LocalPassword
+      POSTGRES_DB: erpv
+      POSTGRES_PASSWORD: erpv
+      POSTGRES_USER: erpv
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
