@@ -7,7 +7,9 @@ schema_view = get_schema_view(
     openapi.Info(
         title="ERPv",
         default_version="v0.1",
-        license=openapi.License(name="BSD License"),
+        license=openapi.License(
+            name="MIT License", url="https://github.com/Um9i/ERPv/blob/master/LICENSE"
+        ),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
