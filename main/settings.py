@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRETKEY")
+SECRET_KEY = os.getenv("SECRETKEY", "SECRET")
 
 
 # Security Settings
@@ -65,7 +65,7 @@ ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, f"client{os.sep}build")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,10 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, f"client{os.sep}staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, f"client{os.sep}build{os.sep}staticfiles")
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, f"client{os.sep}static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, f"client{os.sep}build{os.sep}static")]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 REST_FRAMEWORK = {

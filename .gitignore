@@ -1,11 +1,6 @@
 __pycache__
-Pipfile.lock
-
 .coverage
 .env
 .pytest_cache
-.vscode
-*.sqlite3
-
 htmlcov
 staticfiles
