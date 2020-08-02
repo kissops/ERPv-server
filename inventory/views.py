@@ -1,5 +1,10 @@
-from .models import Warehouse, Product, Location
-from .serializers import WarehouseSerializer, ProductSerializer, LocationSerializer
+from .models import Warehouse, Product, Location, LocationQuantity
+from .serializers import (
+    WarehouseSerializer,
+    ProductSerializer,
+    LocationSerializer,
+    LocationQuantitySerializer,
+)
 from rest_framework import viewsets
 
 
@@ -16,3 +21,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+
+class LocationQuantityViewSet(viewsets.ModelViewSet):
+    queryset = LocationQuantity.objects.all()
+    serializer_class = LocationQuantitySerializer

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Warehouse, Product, Location
+from .models import Warehouse, Product, Location, LocationQuantity
 
 
 class WarehouseSerializer(serializers.HyperlinkedModelSerializer):
@@ -33,3 +33,9 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
         fields = ["url", "id", "warehouse", "name"]
+
+
+class LocationQuantitySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = LocationQuantity
+        fields = ["url", "id", "product", "location", "quantity"]
