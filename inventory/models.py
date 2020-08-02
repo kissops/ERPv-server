@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models
+from django.db.models import Sum
 from django.urls import reverse
 from ledger.models import InventoryLedger
 
@@ -103,3 +104,24 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class LocationQuantity(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.product} {self.location} {self.quantity}"
+
+    def save(self, *args, **kwargs):
+        # save the related product to update the quantity
+        product = Product.objects.get(pk=self.product.pk)
+        product.quantity = (
+            self.quantity
+            + LocationQuantity.objects.filter(product=product).aggregate(
+                Sum("quantity")
+            )["quantity__sum"]
+        )
+        product.save()
+        super().save(*args, **kwargs)
