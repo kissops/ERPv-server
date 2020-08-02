@@ -19,6 +19,7 @@
 	// "postCreateCommand": "pip install -r requirements.txt",
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"visualstudioexptteam.vscodeintellicode"
 	]
 }
