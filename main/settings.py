@@ -1,19 +1,23 @@
 import dj_database_url
 import os
+from pathlib import Path, PurePath
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = os.getenv("SECRETKEY", "SECRET")
 
 
 # Security Settings
 # SECURITY WARNING: don't run with debug turned on in production!
+
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 DEBUG = True
@@ -65,7 +69,7 @@ ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, f"client{os.sep}build")],
+        "DIRS": [PurePath(BASE_DIR, Path("client/build/"))],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,7 +89,6 @@ WSGI_APPLICATION = "main.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 
 DATABASES = {
     "default": {
@@ -125,17 +128,23 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, f"client{os.sep}build{os.sep}staticfiles")
+STATIC_ROOT = PurePath(BASE_DIR, Path("client/build/staticfiles/"))
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [PurePath(BASE_DIR, Path("client/build/static/"))]
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+COMPRESS_ENABLED = os.getenv("COMPRESS", False)
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, f"client{os.sep}build{os.sep}static")]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Rest Framework Settings
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
+
+
+# Login Redirect
 
 LOGIN_REDIRECT_URL = "/"
