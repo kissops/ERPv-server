@@ -4,3 +4,5 @@ __pycache__
 .pytest_cache
 htmlcov
 staticfiles
+*.sqlite3
+client
