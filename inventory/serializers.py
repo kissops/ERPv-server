@@ -32,10 +32,10 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Location
-        fields = ["url", "id", "warehouse", "name"]
+        fields = ["url", "id", "warehouse", "name", "location_warehouse"]
 
 
 class LocationQuantitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = LocationQuantity
-        fields = ["url", "id", "product", "location", "quantity"]
+        fields = ["url", "id", "product", "location", "quantity", "location_name", "location_warehouse", "product_name"]

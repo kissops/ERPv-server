@@ -102,6 +102,9 @@ class Location(models.Model):
         ordering = ["name"]
         unique_together = ("warehouse", "name")
 
+    def location_warehouse(self):
+        return self.warehouse.name
+
     def __str__(self):
         return self.name
 
@@ -114,14 +117,26 @@ class LocationQuantity(models.Model):
     def __str__(self):
         return f"{self.product} {self.location} {self.quantity}"
 
+    def location_name(self):
+        return self.location.name
+
+    def location_warehouse(self):
+        return self.location.warehouse.name
+
+    def product_name(self):
+        return self.product.name
+
     def save(self, *args, **kwargs):
         # save the related product to update the quantity
         product = Product.objects.get(pk=self.product.pk)
-        product.quantity = (
-            self.quantity
-            + LocationQuantity.objects.filter(product=product).aggregate(
-                Sum("quantity")
-            )["quantity__sum"]
-        )
+        try:
+            product.quantity = (
+                self.quantity
+                + LocationQuantity.objects.filter(product=product).aggregate(
+                    Sum("quantity")
+                )["quantity__sum"]
+            )
+        except:
+            product.quantity = self.quantity
         product.save()
         super().save(*args, **kwargs)
