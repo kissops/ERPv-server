@@ -5,4 +5,4 @@ __pycache__
 htmlcov
 staticfiles
 *.sqlite3
-client
+venv
