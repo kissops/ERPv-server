@@ -1,4 +1,4 @@
-name: Django application
+name: ERPv CI
 
 on:
   push:
