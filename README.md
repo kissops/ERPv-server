@@ -14,5 +14,4 @@
 
 ## Documentation
 
-* [Development Setup](https://github.com/Um9i/ERPv/wiki/Development-Setup)
-
+* [Development Setup](https://github.com/kissops/ERPv/wiki/Development-Setup)
