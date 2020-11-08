@@ -6,7 +6,7 @@
 
 **_Open Source Hybrid Enterprise Resource Planning._**
 
-![ERPv CI](https://github.com/kissops/ERPv/workflows/ERPv%20CI/badge.svg)
+![ERPv CI](https://github.com/kissops/ERPv-server/workflows/ERPv%20CI/badge.svg)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-black.svg)](https://github.com/ambv/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -14,4 +14,4 @@
 
 ## Documentation
 
-* [Development Setup](https://github.com/kissops/ERPv/wiki/Development-Setup)
+* [Development Setup](https://github.com/kissops/ERPv-server/wiki/Development-Setup)
