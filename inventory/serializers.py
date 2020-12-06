@@ -38,4 +38,13 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 class LocationQuantitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = LocationQuantity
-        fields = ["url", "id", "product", "location", "quantity", "location_name", "location_warehouse", "product_name"]
+        fields = [
+            "url",
+            "id",
+            "product",
+            "location",
+            "quantity",
+            "location_name",
+            "location_warehouse",
+            "product_name",
+        ]
