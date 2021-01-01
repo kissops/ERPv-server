@@ -22,6 +22,9 @@ class SalesTestCase(TestCase):
         )
         self.so_line = SalesOrderLine.objects.get(pk=1)
 
+    def test_sold_product(self):
+        self.assertEqual(self.sp.__str__(), "s_product 1")
+
     def test_sold_product_allocated_as_sold(self):
         self.assertEqual(self.sp.sold(), 10.00)
 
