@@ -80,12 +80,12 @@ class Product(models.Model):
         )
         required = stock_with_orders - allocated_stock
         try:
-            if required < 0.00:
+            if required < Decimal(0.00):
                 return abs(required)
             else:
-                return 0
+                return Decimal(0.00)
         except:
-            return 0
+            return Decimal(0.00)
 
     def get_absolute_url(self):
         return reverse("product_detail", args=[str(self.id)])
@@ -112,7 +112,7 @@ class Location(models.Model):
 class LocationQuantity(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return f"{self.product} {self.location} {self.quantity}"
