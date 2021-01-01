@@ -128,13 +128,13 @@ class LocationQuantity(models.Model):
 
     def save(self, *args, **kwargs):
         # save the related product to update the quantity
-        product = Product.objects.get(pk=self.product.pk)
+        product = Product.objects.select_for_update().get(pk=self.product.pk)
         try:
             product.quantity = (
                 self.quantity
-                + LocationQuantity.objects.filter(product=product).aggregate(
-                    Sum("quantity")
-                )["quantity__sum"]
+                + LocationQuantity.objects.select_for_update()
+                .filter(product=product)
+                .aggregate(Sum("quantity"))["quantity__sum"]
             )
         except:
             product.quantity = self.quantity

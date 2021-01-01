@@ -97,7 +97,7 @@ class Job(models.Model):
 
     def save(self, *args, **kwargs):
         if self.complete == True and self.bom_allocated == True:
-            product = Product.objects.get(pk=self.product.pk)
+            product = Product.objects.select_for_update().get(pk=self.product.pk)
             product.quantity = product.quantity + Decimal(self.quantity)
             product.save()
             if self.quantity != 0.00:
@@ -110,7 +110,9 @@ class Job(models.Model):
             self.complete_date = timezone.now()
             if self.bom() is not None:
                 for item in self.bom():
-                    product = Product.objects.get(pk=item.product.pk)
+                    product = Product.objects.select_for_update().get(
+                        pk=item.product.pk
+                    )
                     product.quantity = product.quantity - item.quantity * Decimal(
                         self.quantity
                     )
@@ -126,7 +128,9 @@ class Job(models.Model):
         else:
             if self.bom() is not None:
                 for item in self.bom():
-                    product = Product.objects.get(pk=item.product.pk)
+                    product = Product.objects.select_for_update().get(
+                        pk=item.product.pk
+                    )
                     product.allocated_for_jobs = (
                         product.allocated_for_jobs
                         + item.quantity * Decimal(self.quantity)

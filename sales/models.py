@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -90,7 +90,7 @@ class SalesOrder(models.Model):
     def save(self, *args, **kwargs):
         if self.complete == True:
             SalesLedger.objects.create(
-                name=self.pk, amount=0.00, value=self.shipped_value()
+                name=self.pk, amount=Decimal(0.00), value=self.shipped_value()
             )
         super().save(*args, **kwargs)
 
@@ -116,18 +116,20 @@ class SalesOrderLine(models.Model):
 
     def save(self, *args, **kwargs):
         # set the value of the line if not set.
-        if self.value != 0.00:
+        if self.value != Decimal(0.00):
             pass
         else:
             self.value = self.valued()
         # if line is complete remove the product from inventory.
         if self.complete == True:
-            product = Product.objects.get(pk=self.product.product.pk)
+            product = Product.objects.select_for_update().get(
+                pk=self.product.product.pk
+            )
             product.quantity = product.quantity - Decimal(self.shipped_quantity)
             product.save()
             self.complete_date = timezone.now()
             # also create a ledger entry when shipping product
-            if self.shipped_quantity != 0.00:
+            if self.shipped_quantity != Decimal(0.00):
                 InventoryLedger.objects.create(
                     name=self.product.product,
                     amount=self.shipped_quantity * -1,
@@ -142,7 +144,7 @@ class SalesOrderLine(models.Model):
         try:
             v = Decimal(self.product.price) * Decimal(self.quantity)
         except:
-            v = 0.00
+            v = Decimal(0.00)
         return v
 
     def shipped_value(self):
@@ -153,5 +155,5 @@ class SalesOrderLine(models.Model):
                 * Decimal(self.shipped_quantity)
             )
         except:
-            sv = 0.00
-        return round(sv, 2)
+            sv = Decimal(0.00)
+        return Decimal(sv).quantize(Decimal(".01"), rounding=ROUND_HALF_UP)

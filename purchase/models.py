@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -90,7 +90,7 @@ class PurchaseOrder(models.Model):
     def save(self, *args, **kwargs):
         if self.complete == True:
             PurchaseLedger.objects.create(
-                name=self.pk, amount=0.00, value=self.received_value()
+                name=self.pk, amount=Decimal(0.00), value=self.received_value()
             )
         super().save(*args, **kwargs)
 
@@ -118,18 +118,20 @@ class PurchaseOrderLine(models.Model):
 
     def save(self, *args, **kwargs):
         # set the value of the line if not set.
-        if self.value != 0.00:
+        if self.value != Decimal(0.00):
             pass
         else:
             self.value = self.valued()
         # if line is complete add the product to inventory.
         if self.complete == True:
-            product = Product.objects.get(pk=self.product.product.pk)
+            product = Product.objects.select_for_update().get(
+                pk=self.product.product.pk
+            )
             product.quantity = product.quantity + Decimal(self.received_quantity)
             product.save()
             self.complete_date = timezone.now()
             # also create a ledger entry when receiving product
-            if self.received_quantity != 0.00:
+            if self.received_quantity != Decimal(0.00):
                 InventoryLedger.objects.create(
                     name=self.product.product,
                     amount=self.received_quantity,
@@ -144,7 +146,7 @@ class PurchaseOrderLine(models.Model):
         try:
             v = Decimal(self.product.cost) * Decimal(self.quantity)
         except:
-            v = 0.00
+            v = Decimal(0.00)
         return v
 
     def received_value(self):
@@ -155,5 +157,5 @@ class PurchaseOrderLine(models.Model):
                 * Decimal(self.received_quantity)
             )
         except:
-            rv = 0.00
-        return round(rv, 2)
+            rv = Decimal(0.00)
+        return Decimal(rv).quantize(Decimal(".01"), rounding=ROUND_HALF_UP)
