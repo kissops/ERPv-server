@@ -1,5 +1,5 @@
 from decimal import Decimal, ROUND_HALF_UP
-from django.db import models
+from django.db import models, transaction
 from django.utils import timezone
 from django.urls import reverse
 from inventory.models import Product
@@ -114,6 +114,7 @@ class SalesOrderLine(models.Model):
     class Meta:
         ordering = ["product__name"]
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         # set the value of the line if not set.
         if self.value != Decimal(0.00):

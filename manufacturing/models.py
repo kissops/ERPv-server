@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from inventory.models import Product
@@ -95,6 +95,7 @@ class Job(models.Model):
         except:
             pass
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         if self.complete == True and self.bom_allocated == True:
             product = Product.objects.select_for_update().get(pk=self.product.pk)
